@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Localização | Rover AgroTech</title>
+
+    <link rel="stylesheet" href="css/localizacao.css">
+    <link rel="stylesheet" href="css/global.css">
+
+    <!-- Leaflet -->
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+</head>
+
+<body>
+
+    <!-- MENU LATERAL -->
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            <div class="logo-icon">🤖</div>
+
+            <div>
+                <h2>Rover</h2>
+                <span>AgroTech</span>
+            </div>
+        </div>
+
+        <nav class="menu">
+
+            <a href="index.html" class="menu-item">
+                <span>📊</span>
+                Dashboard
+            </a>
+
+            <a href="rovers.html" class="menu-item">
+                <span>🤖</span>
+                Rovers
+            </a>
+
+            <a href="historico.html" class="menu-item">
+                <span>📈</span>
+                Histórico
+            </a>
+
+            <a href="localizacao.html" class="menu-item active">
+                <span>📍</span>
+                Localização
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+            <button id="logoutButton">🚪 Sair</button>
+        </div>
+
+    </aside>
+
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="main-content">
+
+        <header class="page-header">
+
+            <div>
+                <h1>Localização</h1>
+                <p>Acompanhe a posição do Rover em tempo real.</p>
+            </div>
+
+            <div class="rover-selector">
+
+                <label for="roverSelect">Rover</label>
+
+                <select id="roverSelect">
+                    <option value="">Carregando...</option>
+                </select>
+
+            </div>
+
+        </header>
+
+
+        <!-- CARD DO MAPA -->
+        <section class="map-card">
+
+            <div class="map-card-header">
+
+                <div>
+                    <h2>📍 Localização do Rover</h2>
+                    <p id="locationStatus">
+                        Aguardando localização...
+                    </p>
+                </div>
+
+                <div class="coordinates" id="coordinates">
+                    Latitude: -- <br>
+                    Longitude: --
+                </div>
+
+            </div>
+
+            <div id="map"></div>
+
+        </section>
+
+
+        <!-- INFORMAÇÕES DA LOCALIZAÇÃO -->
+        <section class="location-info">
+
+            <div class="info-card">
+
+                <span class="info-icon">🤖</span>
+
+                <div>
+                    <span class="info-label">Rover</span>
+                    <strong id="roverName">--</strong>
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <span class="info-icon">📍</span>
+
+                <div>
+                    <span class="info-label">Latitude</span>
+                    <strong id="latitude">--</strong>
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <span class="info-icon">📍</span>
+
+                <div>
+                    <span class="info-label">Longitude</span>
+                    <strong id="longitude">--</strong>
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <span class="info-icon">🕒</span>
+
+                <div>
+                    <span class="info-label">Última atualização</span>
+                    <strong id="lastUpdate">--</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Leaflet -->
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        >
+    </script>
+
+    <!-- JavaScript da página -->
+    <script src="js/localizacao.js"></script>
+
+</body>
+</html>

@@ -660,6 +660,7 @@ let temperatureChart = null;
 let soilHumidityChart = null;
 let airHumidityChart = null;
 let rssiChart = null;
+let airQualityChart = null;
 let ultimoTotalTelemetrias = 0;
 
 
@@ -752,6 +753,11 @@ async function carregarGraficos(idRover) {
                 item.sinal_lora_rssi
             );
 
+            const qualidadeAr =
+    dados.map(item =>
+        item.qualidade_ar
+    );
+
 
         // ========================================
         // DESTRUIR GRÁFICOS ANTERIORES
@@ -773,6 +779,9 @@ async function carregarGraficos(idRover) {
             rssiChart.destroy();
         }
 
+       if (airQualityChart) {
+    airQualityChart.destroy();
+}
 
         // ========================================
         // TEMPERATURA
@@ -1022,6 +1031,75 @@ async function carregarGraficos(idRover) {
         }
 
 
+
+// ========================================
+// QUALIDADE DO AR
+// ========================================
+
+const airQualityCanvas =
+    document.getElementById(
+        "airQualityChart"
+    );
+
+if (airQualityCanvas) {
+
+    airQualityChart = new Chart(
+        airQualityCanvas,
+        {
+            type: "line",
+
+            data: {
+                labels: labels,
+
+                datasets: [
+                    {
+                        label:
+                            "Qualidade do ar",
+
+                        data:
+                            qualidadeAr,
+
+                        tension: 0.3,
+
+                        borderWidth: 2,
+
+                        pointRadius: 3
+                    }
+                ]
+            },
+
+            options: {
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                scales: {
+
+                    y: {
+                        beginAtZero: true,
+
+                        title: {
+                            display: true,
+
+                            text: "Qualidade"
+                        }
+                    },
+
+                    x: {
+                        title: {
+                            display: true,
+
+                            text: "Horário"
+                        }
+                    }
+
+                }
+            }
+        }
+    );
+}
+
+
         // ========================================
         // SINAL LORA
         // ========================================
@@ -1105,6 +1183,7 @@ async function carregarGraficos(idRover) {
 
         }
 
+        
 
         console.log(
             "📊 Gráficos históricos carregados!"

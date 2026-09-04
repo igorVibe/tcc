@@ -9,6 +9,7 @@
 
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="css/global.css">
 </head>
 
 <body>
@@ -31,28 +32,27 @@
 
         <nav class="menu">
 
-            <a href="#" class="menu-item active">
-                <span>📊</span>
-                Dashboard
-            </a>
+    <a href="index.html" class="menu-item active">
+        <span>📊</span>
+        Dashboard
+    </a>
 
-            <a href="#" class="menu-item">
-                <span>🤖</span>
-                Rovers
-            </a>
+    <a href="rovers.html" class="menu-item">
+        <span>🤖</span>
+        Rovers
+    </a>
 
-            <a href="#" class="menu-item">
-                <span>📈</span>
-                Histórico
-            </a>
+    <a href="historico.html" class="menu-item">
+        <span>📈</span>
+        Histórico
+    </a>
 
-            <a href="#" class="menu-item">
-                <span>📍</span>
-                Localização
-            </a>
+    <a href="localizacao.html" class="menu-item">
+        <span>📍</span>
+        Localização
+    </a>
 
-        </nav>
-
+</nav>
 
         <div class="sidebar-footer">
 
@@ -485,6 +485,14 @@
                         <canvas id="rssiChart"></canvas>
                     </div>
                 </div>
+
+                <div class="chart-box">
+    <h3>🌫️ Qualidade do ar</h3>
+
+    <div class="chart-container">
+        <canvas id="airQualityChart"></canvas>
+    </div>
+</div>
 
     </div>
 
