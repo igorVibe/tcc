@@ -77,19 +77,36 @@ def on_message(client, userdata, msg):
 
 
 # Cria o cliente MQTT
-client = mqtt.Client()
+client = mqtt.Client(
+    client_id="rover-agrotech-worker"
+)
 
 client.on_connect = on_connect
 client.on_message = on_message
 
-
-# Broker de teste
-BROKER = "test.mosquitto.org"
+BROKER = "mqtt.eclipseprojects.io"
 PORTA = 1883
+TOPICO = "rover/telemetria"
 
 print("🔌 Conectando ao broker MQTT...")
+print(f"🌐 Broker: {BROKER}")
+print(f"🔌 Porta: {PORTA}")
 
-client.connect(BROKER, PORTA, 60)
+try:
+    client.connect(BROKER, PORTA, 60)
 
-# Mantém o MQTT funcionando
-client.loop_forever()
+    print("✅ Conexão MQTT estabelecida!")
+
+    resultado = client.subscribe(TOPICO)
+
+    print(f"📡 Inscrito no tópico: {TOPICO}")
+    print(f"📡 Resultado da inscrição: {resultado}")
+
+    print("🔄 Aguardando mensagens...")
+
+    client.loop_forever()
+
+except Exception as e:
+    print("❌ ERRO AO CONECTAR/ASSINAR MQTT:")
+    print(type(e).__name__)
+    print(e)

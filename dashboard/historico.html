@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histórico | Rover AgroTech</title>
+    <link rel="stylesheet" href="css/historico.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo-area">
+            <div class="logo-icon">🤖</div>
+            <div>
+                <h2>Rover</h2>
+                <span>AgroTech</span>
+            </div>
+        </div>
+
+        <nav class="menu">
+            <a href="index.html">📊 <span>Dashboard</span></a>
+            <a href="rovers.html">🤖 <span>Rovers</span></a>
+            <a href="historico.html" class="active">📋 <span>Histórico</span></a>
+            <a href="localizacao.html">📍 <span>Localização</span></a>
+        </nav>
+
+        <button id="logoutButton" class="logout">🚪 Sair</button>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <div>
+                <h1>Histórico</h1>
+                <p>Registro das telemetrias recebidas pelo Rover AgroTech</p>
+            </div>
+            <span class="status">● Sistema online</span>
+        </header>
+
+        <section class="panel">
+            <div class="filters">
+                <div class="field">
+                    <label for="roverSelect">Rover</label>
+                    <select id="roverSelect"></select>
+                </div>
+
+                <div class="field">
+                    <label for="dataInicial">Data inicial</label>
+                    <input type="date" id="dataInicial">
+                </div>
+
+                <div class="field">
+                    <label for="dataFinal">Data final</label>
+                    <input type="date" id="dataFinal">
+                </div>
+
+                <button id="filtrarButton" class="primary-button">🔎 Filtrar</button>
+                <button id="limparButton" class="secondary-button">Limpar</button>
+            </div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-header">
+                <div>
+                    <h2>Telemetrias</h2>
+                    <span id="totalRegistros">0 registros</span>
+                </div>
+                <button id="atualizarButton" class="secondary-button">🔄 Atualizar</button>
+            </div>
+
+            <div id="mensagem" class="message"></div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Data/Hora</th>
+                            <th>Temperatura</th>
+                            <th>Umidade do solo</th>
+                            <th>Umidade do ar</th>
+                            <th>Qualidade do ar</th>
+                            <th>RSSI LoRa</th>
+                            <th>Latitude</th>
+                            <th>Longitude</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historicoBody"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/historico.js"></script>
+</body>
+</html>

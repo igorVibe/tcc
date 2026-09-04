@@ -80,24 +80,49 @@ async function carregarRovers() {
         // carrega a telemetria do primeiro
         if (rovers.length > 0) {
 
-            const primeiroRover = rovers[0];
+    // Verifica se existe um Rover selecionado
+    // vindo da página Rovers
+         const roverSalvo =
+            localStorage.getItem("selected_rover");
 
-            selectedRover.textContent =
-                primeiroRover.id_rover;
+    // Procura o Rover salvo
+         let roverSelecionado =
+            rovers.find(
+                rover => rover.id_rover === roverSalvo
+        );
 
-            atualizarBateria(
-                primeiroRover.bateria
-            );
+    // Se não encontrou o Rover salvo,
+    // utiliza o primeiro Rover da lista
+        if (!roverSelecionado) {
 
-            carregarTelemetria(
-                primeiroRover.id_rover
-            );
+            roverSelecionado = rovers[0];
 
-            carregarGraficos(
-                primeiroRover.id_rover
-            );
+    }
 
-        }
+    // Atualiza o select
+    roverSelect.value =
+        roverSelecionado.id_rover;
+
+    // Atualiza o nome/ID exibido
+    selectedRover.textContent =
+        roverSelecionado.id_rover;
+
+    // Atualiza bateria
+    atualizarBateria(
+        roverSelecionado.bateria
+    );
+
+    // Carrega telemetria
+    carregarTelemetria(
+        roverSelecionado.id_rover
+    );
+
+    // Carrega gráficos
+    carregarGraficos(
+        roverSelecionado.id_rover
+    );
+
+}
 
 
     } catch (error) {
@@ -428,6 +453,51 @@ function atualizarBateria(bateria) {
 
 }
 
+// ========================================
+// ATUALIZAR DADOS DO ROVER AUTOMATICAMENTE
+// ========================================
+
+async function atualizarRoverSelecionado() {
+
+    const idRover = roverSelect.value;
+
+    if (!idRover) {
+        return;
+    }
+
+    try {
+
+        const response = await fetch(
+            `${API_URL}/rovers/${encodeURIComponent(idRover)}/`,
+            {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Erro ao buscar dados do Rover.");
+        }
+
+        const rover = await response.json();
+
+        console.log("🔋 Dados do Rover atualizados:", rover);
+
+        atualizarBateria(rover.bateria);
+
+    } catch (error) {
+
+        console.error(
+            "❌ Erro ao atualizar dados do Rover:",
+            error
+        );
+
+    }
+}
+
 
 // ========================================
 // TROCA DE ROVER
@@ -439,6 +509,11 @@ roverSelect.addEventListener(
 
         const idRover =
             this.value;
+
+        localStorage.setItem(
+            "selected_rover",
+            idRover
+        );
 
 
         selectedRover.textContent =
@@ -479,15 +554,9 @@ roverSelect.addEventListener(
             }
 
 
-            const rover =
-                await response.json();
+            const rover = await response.json();
 
-
-            console.log(
-                "Rover selecionado:",
-                rover
-            );
-
+            console.log("Rover selecionado:", rover);
 
             atualizarBateria(
                 rover.bateria
@@ -548,6 +617,36 @@ document
 
 carregarRovers();
 
+// ==========================================
+// ATUALIZAÇÃO AUTOMÁTICA DA TELEMETRIA
+// ==========================================
+
+setInterval(() => {
+
+    console.log("⏱️ Intervalo de 5 segundos funcionando!");
+
+    const idRover = roverSelect.value;
+
+    console.log("🤖 Rover selecionado:", idRover);
+
+    if (idRover) {
+
+        console.log("🔄 Atualizando dados do Rover...");
+
+        carregarTelemetria(idRover);
+
+        atualizarRoverSelecionado();
+
+        atualizarGraficosAutomaticamente();
+
+    } else {
+
+        console.warn("⚠️ Nenhum Rover selecionado!");
+
+    }
+
+}, 5000);
+
 
 // ========================================
 // GRÁFICO DE TEMPERATURA
@@ -561,6 +660,7 @@ let temperatureChart = null;
 let soilHumidityChart = null;
 let airHumidityChart = null;
 let rssiChart = null;
+let ultimoTotalTelemetrias = 0;
 
 
 async function carregarGraficos(idRover) {
@@ -1021,6 +1121,74 @@ async function carregarGraficos(idRover) {
     }
 
 }
+
+// ========================================
+// ATUALIZAÇÃO AUTOMÁTICA DOS GRÁFICOS
+// ========================================
+
+async function atualizarGraficosAutomaticamente() {
+
+    const idRover = roverSelect.value;
+
+    if (!idRover) {
+        return;
+    }
+
+    try {
+
+        const response = await fetch(
+            `${API_URL}/telemetrias/?rover=${encodeURIComponent(idRover)}`,
+            {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error(
+                "Erro ao buscar telemetrias para os gráficos."
+            );
+        }
+
+        const resultado = await response.json();
+
+        const telemetrias =
+            resultado.results || resultado;
+
+        if (!telemetrias || telemetrias.length === 0) {
+            return;
+        }
+
+        // Verifica se chegaram novas telemetrias
+        if (
+            telemetrias.length !==
+            ultimoTotalTelemetrias
+        ) {
+
+            console.log(
+                "📊 Novas telemetrias encontradas. Atualizando gráficos..."
+            );
+
+            ultimoTotalTelemetrias =
+                telemetrias.length;
+
+            carregarGraficos(idRover);
+        }
+
+    } catch (error) {
+
+        console.error(
+            "❌ Erro ao atualizar gráficos:",
+            error
+        );
+
+    }
+}
+ 
+
 
 // ========================================
 // MAPA - LEAFLET

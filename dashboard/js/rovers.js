@@ -199,8 +199,22 @@ async function carregarRovers() {
                     document.createElement("div");
 
 
-                card.className =
-                    "rover-card";
+                card.className = "rover-card";
+
+                // ========================================
+                // ABRIR DASHBOARD DO ROVER
+                // ========================================
+                
+                card.style.cursor = "pointer";
+
+                card.addEventListener("click", () => {
+                    localStorage.setItem(
+                        "selected_rover",
+                        rover.id_rover
+    );
+                    window.location.href = "index.html";
+
+                    });
 
 
                 // ========================================
