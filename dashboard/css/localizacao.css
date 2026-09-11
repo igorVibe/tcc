@@ -1,49 +1,34 @@
 /* ========================================
-   ROVER AGROTECH - LOCALIZAÇÃO
-   ======================================== */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f5f7fa;
-    color: #1f2937;
-}
+   LOCALIZAÇÃO
+======================================== */
 
 
 /* ========================================
-   MENU LATERAL
-   ======================================== */
+   SIDEBAR
+======================================== */
 
 .sidebar {
     position: fixed;
+
     left: 0;
     top: 0;
 
-    width: 250px;
+    width: 240px;
     height: 100vh;
 
-    background: #ffffff;
-    border-right: 1px solid #e5e7eb;
+    padding: 25px 18px;
 
     display: flex;
     flex-direction: column;
 
-    padding: 25px 18px;
-
     z-index: 1000;
 }
 
-
-/* LOGO */
-
 .sidebar-logo {
     display: flex;
+
     align-items: center;
+
     gap: 12px;
 
     padding: 5px 10px 30px;
@@ -54,10 +39,12 @@ body {
     height: 45px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
-    background: #eef7ee;
+    background: var(--green-soft);
+
     border-radius: 12px;
 
     font-size: 25px;
@@ -65,62 +52,51 @@ body {
 
 .sidebar-logo h2 {
     font-size: 20px;
-    font-weight: 700;
-
-    color: #1f2937;
 }
 
 .sidebar-logo span {
     font-size: 13px;
-    color: #6b7280;
 }
 
 
-/* MENU */
+/* ========================================
+   MENU
+======================================== */
 
 .menu {
     display: flex;
+
     flex-direction: column;
-    gap: 7px;
+
+    gap: 6px;
 }
 
 .menu-item {
     display: flex;
+
     align-items: center;
 
     gap: 12px;
 
-    padding: 13px 14px;
+    padding: 12px 14px;
 
-    border-radius: 10px;
+    border-radius: 8px;
 
     text-decoration: none;
 
-    color: #6b7280;
-
     font-size: 14px;
-    font-weight: 500;
 
-    transition: 0.2s ease;
+    transition: 0.2s;
 }
 
 .menu-item span {
     font-size: 18px;
 }
 
-.menu-item:hover {
-    background: #f3f6f3;
-    color: #1f2937;
-}
 
-.menu-item.active {
-    background: #e9f4e9;
-    color: #2f7d32;
-    font-weight: 600;
-}
-
-
-/* RODAPÉ DO MENU */
+/* ========================================
+   LOGOUT
+======================================== */
 
 .sidebar-footer {
     margin-top: auto;
@@ -130,35 +106,27 @@ body {
     width: 100%;
 
     border: none;
+
     background: transparent;
 
-    padding: 13px 14px;
+    padding: 12px 14px;
 
-    border-radius: 10px;
+    border-radius: 8px;
 
     text-align: left;
-
-    color: #6b7280;
 
     font-size: 14px;
 
     cursor: pointer;
-
-    transition: 0.2s ease;
-}
-
-#logoutButton:hover {
-    background: #fef2f2;
-    color: #dc2626;
 }
 
 
 /* ========================================
-   CONTEÚDO PRINCIPAL
-   ======================================== */
+   MAIN
+======================================== */
 
 .main-content {
-    margin-left: 250px;
+    margin-left: 240px;
 
     min-height: 100vh;
 
@@ -168,11 +136,13 @@ body {
 
 /* ========================================
    CABEÇALHO
-   ======================================== */
+======================================== */
 
 .page-header {
     display: flex;
+
     align-items: flex-end;
+
     justify-content: space-between;
 
     gap: 25px;
@@ -182,25 +152,22 @@ body {
 
 .page-header h1 {
     font-size: 30px;
-    font-weight: 700;
-
-    color: #111827;
 
     margin-bottom: 7px;
 }
 
 .page-header p {
     font-size: 14px;
-    color: #6b7280;
 }
 
 
 /* ========================================
-   SELETOR DO ROVER
-   ======================================== */
+   SELETOR
+======================================== */
 
 .rover-selector {
     display: flex;
+
     flex-direction: column;
 
     gap: 6px;
@@ -213,7 +180,7 @@ body {
 
     font-weight: 600;
 
-    color: #6b7280;
+    color: var(--text-secondary);
 }
 
 .rover-selector select {
@@ -221,12 +188,9 @@ body {
 
     padding: 11px 13px;
 
-    border: 1px solid #d1d5db;
-    border-radius: 9px;
+    border: 1px solid var(--border);
 
-    background: #ffffff;
-
-    color: #1f2937;
+    border-radius: 8px;
 
     font-size: 14px;
 
@@ -235,55 +199,41 @@ body {
     cursor: pointer;
 }
 
-.rover-selector select:focus {
-    border-color: #4d914f;
-}
-
 
 /* ========================================
-   CARD DO MAPA
-   ======================================== */
+   MAPA
+======================================== */
 
 .map-card {
-    background: #ffffff;
-
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border);
 
     border-radius: 15px;
 
     overflow: hidden;
-
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
-
-
-/* CABEÇALHO DO MAPA */
 
 .map-card-header {
     display: flex;
 
     align-items: center;
+
     justify-content: space-between;
 
     gap: 20px;
 
     padding: 22px 24px;
 
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid var(--border);
 }
 
 .map-card-header h2 {
     font-size: 18px;
-
-    color: #111827;
 
     margin-bottom: 6px;
 }
 
 .map-card-header p {
     font-size: 13px;
-
-    color: #6b7280;
 }
 
 .coordinates {
@@ -293,25 +243,19 @@ body {
 
     line-height: 1.7;
 
-    color: #6b7280;
+    color: var(--text-secondary);
 }
-
-
-/* ========================================
-   MAPA
-   ======================================== */
 
 #map {
     width: 100%;
-    height: 520px;
 
-    background: #eef1f3;
+    height: 520px;
 }
 
 
 /* ========================================
-   INFORMAÇÕES DA LOCALIZAÇÃO
-   ======================================== */
+   INFORMAÇÕES
+======================================== */
 
 .location-info {
     display: grid;
@@ -330,15 +274,11 @@ body {
 
     gap: 14px;
 
-    background: #ffffff;
-
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border);
 
     border-radius: 13px;
 
     padding: 18px;
-
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
 }
 
 .info-icon {
@@ -350,7 +290,7 @@ body {
     align-items: center;
     justify-content: center;
 
-    background: #eef7ee;
+    background: var(--green-soft);
 
     border-radius: 10px;
 
@@ -371,14 +311,12 @@ body {
 
 .info-label {
     font-size: 12px;
-
-    color: #6b7280;
 }
 
 .info-card strong {
     font-size: 14px;
 
-    color: #111827;
+    color: var(--text-primary);
 
     word-break: break-word;
 }
@@ -386,7 +324,7 @@ body {
 
 /* ========================================
    RESPONSIVIDADE
-   ======================================== */
+======================================== */
 
 @media (max-width: 1100px) {
 
@@ -399,11 +337,11 @@ body {
 @media (max-width: 800px) {
 
     .sidebar {
-        width: 210px;
+        width: 200px;
     }
 
     .main-content {
-        margin-left: 210px;
+        margin-left: 200px;
 
         padding: 25px;
     }
@@ -433,7 +371,8 @@ body {
         height: auto;
 
         border-right: none;
-        border-bottom: 1px solid #e5e7eb;
+
+        border-bottom: 1px solid var(--border);
     }
 
     .main-content {

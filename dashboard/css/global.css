@@ -1,13 +1,15 @@
 /* ========================================
    ROVER AGROTECH
    TEMA GLOBAL DO SISTEMA
-   ======================================== */
+======================================== */
 
 :root {
     --bg-main: #171a1b;
     --bg-sidebar: #151819;
+
     --bg-card: #181b1c;
     --bg-card-hover: #1d2122;
+    --bg-input: #202425;
 
     --border: #34383a;
     --border-light: #2a2e30;
@@ -21,6 +23,7 @@
     --green-dark: #173d20;
     --green-soft: #1b3320;
 
+    --success: #22c55e;
     --danger: #dc2626;
 
     --radius: 12px;
@@ -29,7 +32,7 @@
 
 /* ========================================
    RESET
-   ======================================== */
+======================================== */
 
 * {
     box-sizing: border-box;
@@ -43,69 +46,74 @@ body {
 }
 
 body {
-    background: var(--bg-main) !important;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg-main);
     color: var(--text-primary);
-    font-family: Arial, Helvetica, sans-serif !important;
 }
 
 
 /* ========================================
    SIDEBAR
-   ======================================== */
+======================================== */
 
 .sidebar {
-    background: var(--bg-sidebar) !important;
-    border-right: 1px solid var(--border) !important;
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border);
 }
 
 
 /* LOGO */
 
-.sidebar-logo h2 {
-    color: var(--text-primary) !important;
+.sidebar-logo h2,
+.logo-area h2 {
+    color: var(--text-primary);
 }
 
-.sidebar-logo span {
-    color: var(--text-secondary) !important;
+.sidebar-logo span,
+.logo-area span {
+    color: var(--text-secondary);
 }
 
 .logo-icon {
-    background: var(--green-soft) !important;
+    background: var(--green-soft);
 }
 
 
 /* ========================================
    MENU
-   ======================================== */
+======================================== */
 
-.menu-item {
-    color: var(--text-secondary) !important;
-    background: transparent !important;
+.menu-item,
+.menu a {
+    color: var(--text-secondary);
+    background: transparent;
 }
 
-.menu-item:hover {
-    background: var(--bg-card-hover) !important;
-    color: var(--text-primary) !important;
+.menu-item:hover,
+.menu a:hover {
+    background: var(--bg-card-hover);
+    color: var(--text-primary);
 }
 
-.menu-item.active {
-    background: var(--green-dark) !important;
-    color: #ffffff !important;
+.menu-item.active,
+.menu a.active {
+    background: var(--green-dark);
+    color: #ffffff;
 }
 
 
 /* ========================================
    CONTEÚDO
-   ======================================== */
+======================================== */
 
 .main-content {
-    background: var(--bg-main) !important;
+    background: var(--bg-main);
 }
 
 
 /* ========================================
    TÍTULOS
-   ======================================== */
+======================================== */
 
 h1,
 h2,
@@ -121,7 +129,7 @@ p {
 
 /* ========================================
    CARDS
-   ======================================== */
+======================================== */
 
 .status-card,
 .metric-card,
@@ -132,32 +140,16 @@ p {
 .chart-card,
 .rover-selector,
 .rover-status,
-.location-info {
+.location-info,
+.panel {
     background: var(--bg-card);
     border-color: var(--border);
 }
 
 
 /* ========================================
-   BORDAS
-   ======================================== */
-
-.rover-selector,
-.rover-status,
-.status-card,
-.metric-card,
-.info-card,
-.rover-card,
-.map-card,
-.history-card,
-.chart-card {
-    border-color: var(--border) !important;
-}
-
-
-/* ========================================
    LABELS
-   ======================================== */
+======================================== */
 
 .section-label,
 .card-label,
@@ -167,8 +159,8 @@ p {
 
 
 /* ========================================
-   SELECTS
-   ======================================== */
+   INPUTS / SELECTS
+======================================== */
 
 select,
 input,
@@ -176,25 +168,28 @@ button {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-select {
-    background: var(--bg-card) !important;
-    color: var(--text-primary) !important;
-    border-color: var(--border) !important;
+select,
+input {
+    background: var(--bg-input);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
 }
 
 select:focus,
 input:focus {
-    border-color: var(--green) !important;
+    border-color: var(--green);
     outline: none;
 }
 
 
 /* ========================================
    BOTÕES
-   ======================================== */
+======================================== */
 
 button {
-    border-color: var(--border);
+    border: 1px solid var(--border);
+    background: var(--bg-input);
+    color: var(--text-primary);
 }
 
 button:hover {
@@ -202,81 +197,134 @@ button:hover {
 }
 
 
-/* ========================================
-   BOTÃO PRINCIPAL / FILTRO
-   ======================================== */
+/* BOTÃO PRINCIPAL */
 
 .btn-primary,
 .filter-button,
-button.primary {
-    background: var(--green) !important;
-    color: #ffffff !important;
-    border-color: var(--green) !important;
+button.primary,
+.primary-button {
+    background: var(--green);
+    color: #ffffff;
+    border-color: var(--green);
 }
 
 .btn-primary:hover,
 .filter-button:hover,
-button.primary:hover {
-    background: var(--green-light) !important;
+button.primary:hover,
+.primary-button:hover {
+    background: var(--green-light);
+}
+
+
+/* BOTÃO SECUNDÁRIO */
+
+.btn-secondary,
+.secondary-button {
+    background: var(--bg-input);
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+}
+
+.btn-secondary:hover,
+.secondary-button:hover {
+    background: var(--bg-card-hover);
+    color: var(--text-primary);
 }
 
 
 /* ========================================
    LOGOUT
-   ======================================== */
+======================================== */
 
-#logoutButton {
-    color: var(--text-secondary) !important;
+#logoutButton,
+.logout {
+    color: var(--text-secondary);
 }
 
-#logoutButton:hover {
-    background: #2a1919 !important;
-    color: var(--danger) !important;
+#logoutButton:hover,
+.logout:hover {
+    background: #2a1919;
+    color: var(--danger);
 }
 
 
 /* ========================================
    STATUS ONLINE
-   ======================================== */
-
-.status-indicator span {
-    background: #22c55e;
-}
+======================================== */
 
 .status-indicator {
     color: var(--text-secondary);
 }
 
+.status-indicator span {
+    background: var(--success);
+}
+
+
+/* ========================================
+   STATUS DO ROVER
+======================================== */
+
+.rover-status {
+    background: var(--green-soft);
+    color: #7ddc85;
+    border: 1px solid #285a30;
+}
+
 
 /* ========================================
    TABELAS
-   ======================================== */
+======================================== */
 
 table {
     color: var(--text-primary);
 }
 
+thead,
 th {
-    background: #1d2122 !important;
-    color: var(--text-secondary) !important;
-    border-color: var(--border) !important;
+    background: var(--bg-card-hover);
+}
+
+th {
+    color: var(--text-secondary);
+    border-color: var(--border);
 }
 
 td {
-    border-color: var(--border) !important;
     color: var(--text-primary);
+    border-color: var(--border);
 }
 
-tr:hover td {
+tbody tr:hover td {
     background: var(--bg-card-hover);
 }
 
 
 /* ========================================
    TEXTOS SECUNDÁRIOS
-   ======================================== */
+======================================== */
 
 small,
 .text-muted {
     color: var(--text-muted);
+}
+
+
+/* ========================================
+   RESPONSIVIDADE GLOBAL
+======================================== */
+
+@media (max-width: 600px) {
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
 }

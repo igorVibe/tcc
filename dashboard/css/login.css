@@ -1,72 +1,115 @@
+/* ========================================
+   LOGIN
+======================================== */
+
 * {
     margin: 0;
+
     padding: 0;
+
     box-sizing: border-box;
 }
 
+
 body {
     font-family: Arial, Helvetica, sans-serif;
+
+    background: var(--bg-main);
+
+    color: var(--text-primary);
 }
 
-/* =========================
-   LOGIN
-========================= */
+
+/* ========================================
+   PÁGINA
+======================================== */
 
 .login-page {
     min-height: 100vh;
 
     display: flex;
+
     justify-content: center;
+
     align-items: center;
 
-    background: #f1f5f2;
-}
+    background: var(--bg-main);
 
-.login-container {
-    width: 100%;
-    max-width: 420px;
     padding: 20px;
 }
 
+
+/* ========================================
+   CONTAINER
+======================================== */
+
+.login-container {
+    width: 100%;
+
+    max-width: 420px;
+}
+
+
+/* ========================================
+   CARD
+======================================== */
+
 .login-card {
-    background: white;
+    background: var(--bg-card);
+
+    border: 1px solid var(--border);
 
     padding: 40px;
 
     border-radius: 16px;
 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
 }
+
+
+/* ========================================
+   LOGO
+======================================== */
 
 .logo {
     text-align: center;
+
     margin-bottom: 10px;
 }
 
 .logo span {
     display: block;
+
     font-size: 42px;
+
     margin-bottom: 10px;
 }
 
 .logo h1 {
     font-size: 26px;
-    color: #1f2937;
+
+    color: var(--text-primary);
 }
+
+
+/* ========================================
+   SUBTÍTULO
+======================================== */
 
 .login-subtitle {
     text-align: center;
 
-    color: #6b7280;
+    color: var(--text-secondary);
 
     margin-bottom: 30px;
 
     font-size: 14px;
 }
 
-/* =========================
+
+/* ========================================
    INPUTS
-========================= */
+======================================== */
 
 .input-group {
     margin-bottom: 20px;
@@ -78,9 +121,10 @@ body {
     margin-bottom: 7px;
 
     font-size: 14px;
+
     font-weight: bold;
 
-    color: #374151;
+    color: var(--text-secondary);
 }
 
 .input-group input {
@@ -88,7 +132,11 @@ body {
 
     padding: 13px 14px;
 
-    border: 1px solid #d1d5db;
+    background: var(--bg-input);
+
+    color: var(--text-primary);
+
+    border: 1px solid var(--border);
 
     border-radius: 8px;
 
@@ -99,28 +147,33 @@ body {
     transition: 0.2s;
 }
 
-.input-group input:focus {
-    border-color: #2563eb;
-
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+.input-group input::placeholder {
+    color: var(--text-muted);
 }
 
-/* =========================
-   BUTTON
-========================= */
+.input-group input:focus {
+    border-color: var(--green);
+
+    box-shadow: 0 0 0 3px rgba(47, 125, 50, 0.15);
+}
+
+
+/* ========================================
+   BOTÃO
+======================================== */
 
 .login-button {
     width: 100%;
 
     padding: 14px;
 
-    border: none;
+    border: 1px solid var(--green);
 
     border-radius: 8px;
 
-    background: #2563eb;
+    background: var(--green);
 
-    color: white;
+    color: #ffffff;
 
     font-size: 15px;
 
@@ -132,8 +185,15 @@ body {
 }
 
 .login-button:hover {
-    background: #1d4ed8;
+    background: var(--green-light);
+
+    border-color: var(--green-light);
 }
+
+
+/* ========================================
+   MENSAGEM
+======================================== */
 
 .login-message {
     margin-top: 15px;
@@ -141,4 +201,19 @@ body {
     text-align: center;
 
     font-size: 14px;
+
+    color: var(--text-secondary);
+}
+
+
+/* ========================================
+   RESPONSIVO
+======================================== */
+
+@media (max-width: 480px) {
+
+    .login-card {
+        padding: 30px 22px;
+    }
+
 }

@@ -1,25 +1,22 @@
 import json
 import time
-import threading
 import paho.mqtt.client as mqtt
 
 
-# ============================================================
-# CONFIGURAÇÃO MQTT
-# ============================================================
+# ========================================
+# CONFIGURAÇÕES
+# ========================================
 
-BROKER = "mqtt.eclipseprojects.io"
+BROKER = "broker.emqx.io"
 PORTA = 1883
 TOPICO = "rover/telemetria"
 
-CLIENT_ID = "rover-agrotech-teste-01"
 
+# ========================================
+# TELEMETRIA
+# ========================================
 
-# ============================================================
-# DADOS FALSOS DO ROVER
-# ============================================================
-
-dados = {
+telemetria = {
 
     "id_rover": "ROVER-01",
 
@@ -29,108 +26,50 @@ dados = {
 
     "temperatura_ar": 28.4,
 
-    "qualidade_ar": 85.0,
+    "qualidade_ar": 85,
 
-    "latitude": -21.20880000,
+    "latitude": -21.2088,
 
-    "longitude": -50.43280000,
+    "longitude": -50.4328,
 
     "sinal_lora_rssi": -72
 }
 
 
-mensagem = json.dumps(
-    dados
-)
-
-
-# ============================================================
-# EVENTO DE CONEXÃO
-# ============================================================
-
-conectado = threading.Event()
-
-
-def on_connect(
-    client,
-    userdata,
-    connect_flags,
-    reason_code,
-    properties
-):
-
-    if reason_code == 0:
-
-        print("✅ Conectado ao broker!")
-
-        conectado.set()
-
-    else:
-
-        print("❌ Erro ao conectar!")
-
-        print(
-            f"❌ Código: {reason_code}"
-        )
-
-
-# ============================================================
-# EVENTO DE PUBLICAÇÃO
-# ============================================================
-
-def on_publish(
-    client,
-    userdata,
-    mid,
-    reason_code,
-    properties
-):
-
-    print(
-        f"📤 Broker confirmou publicação! "
-        f"MID: {mid}"
-    )
-
-
-# ============================================================
-# CRIA CLIENTE
-# ============================================================
+# ========================================
+# CLIENTE MQTT
+# ========================================
 
 client = mqtt.Client(
-    callback_api_version=mqtt.CallbackAPIVersion.VERSION2,
-    client_id=CLIENT_ID
+    client_id="rover-agrotech-teste-02",
+    protocol=mqtt.MQTTv311
 )
 
-client.on_connect = on_connect
-client.on_publish = on_publish
 
+# ========================================
+# PROGRAMA
+# ========================================
 
-# ============================================================
-# TESTE
-# ============================================================
+print()
+print("========================================")
+print("       TESTE MQTT - ROVER AGROTECH")
+print("========================================")
 
-print("")
-print("=" * 60)
-print("🧪 TESTE MQTT - ROVER AGROTECH")
-print("=" * 60)
-
-print(
-    f"🌐 Broker: {BROKER}"
-)
-
-print(
-    f"🔌 Porta: {PORTA}"
-)
-
-print(
-    f"📡 Tópico: {TOPICO}"
-)
-
-print("")
-print("🔌 Conectando ao broker...")
+print()
+print(f"🌐 Broker: {BROKER}")
+print(f"🔌 Porta: {PORTA}")
+print(f"📡 Tópico: {TOPICO}")
+print("📡 Protocolo: MQTT 3.1.1")
+print()
 
 
 try:
+
+    # ========================================
+    # CONECTAR
+    # ========================================
+
+    print("🔌 Conectando ao broker...")
 
     client.connect(
         BROKER,
@@ -138,83 +77,80 @@ try:
         60
     )
 
-    # Inicia processamento MQTT
     client.loop_start()
 
-    # Aguarda conexão
-    if not conectado.wait(timeout=10):
+    time.sleep(2)
 
-        print(
-            "❌ Timeout aguardando conexão MQTT."
-        )
+    print("✅ Conexão realizada!")
 
-        client.loop_stop()
-        client.disconnect()
+    print()
 
-        exit()
 
-    print("")
-    print("📤 Enviando mensagem...")
+    # ========================================
+    # JSON
+    # ========================================
 
-    print(
-        f"📡 Tópico: {TOPICO}"
+    mensagem = json.dumps(
+        telemetria
     )
 
-    print("")
-    print("📦 Dados enviados:")
 
-    print(
-        json.dumps(
-            dados,
-            indent=4,
-            ensure_ascii=False
-        )
-    )
+    # ========================================
+    # PUBLICAR
+    # ========================================
 
-    # --------------------------------------------------------
-    # PUBLICA
-    # --------------------------------------------------------
+    print("📤 Enviando telemetria...")
 
     resultado = client.publish(
-
         TOPICO,
-
         mensagem,
-
-        qos=0,
-
-        retain=True
+        qos=0
     )
 
-    print("")
-    print(
-        f"📤 Resultado do publish: {resultado}"
-    )
 
-    # Aguarda processamento MQTT
-    time.sleep(3)
+    if resultado.rc == mqtt.MQTT_ERR_SUCCESS:
 
-    print("")
-    print("✅ Mensagem publicada!")
+        print("✅ Publicação aceita pelo cliente MQTT.")
 
-    print("")
-    print("🔌 Desconectando...")
+    else:
+
+        print("❌ Erro na publicação.")
+
+        print(
+            f"Código: {resultado.rc}"
+        )
+
+
+    print()
+    print("📦 Mensagem:")
+    print(mensagem)
+
+    print()
+    print("⏳ Aguardando 5 segundos...")
+
+    time.sleep(5)
+
+
+    # ========================================
+    # FINALIZA
+    # ========================================
 
     client.loop_stop()
 
     client.disconnect()
 
-    print("✅ Teste finalizado!")
+    print()
+    print("========================================")
+    print("          TESTE FINALIZADO")
+    print("========================================")
+
 
 except Exception as e:
 
-    print("")
-    print("❌ ERRO NO TESTE MQTT!")
+    print()
+    print("========================================")
+    print("❌ ERRO")
+    print("========================================")
 
-    print(
-        f"❌ Tipo: {type(e).__name__}"
-    )
-
-    print(
-        f"❌ Detalhes: {e}"
-    )
+    print(type(e).__name__)
+    print(e)
