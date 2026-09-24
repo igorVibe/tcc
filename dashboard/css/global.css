@@ -1,135 +1,102 @@
 /* ========================================
-   ROVER AGROTECH
-   TEMA GLOBAL DO SISTEMA
+   ROVER AGROTECH — IDENTIDADE VISUAL
 ======================================== */
 
 :root {
-    --bg-main: #171a1b;
-    --bg-sidebar: #151819;
-
-    --bg-card: #181b1c;
-    --bg-card-hover: #1d2122;
-    --bg-input: #202425;
-
-    --border: #34383a;
-    --border-light: #2a2e30;
-
-    --text-primary: #f1f3f4;
-    --text-secondary: #9aa0a6;
-    --text-muted: #73797d;
-
-    --green: #2f7d32;
-    --green-light: #3d9141;
-    --green-dark: #173d20;
-    --green-soft: #1b3320;
-
-    --success: #22c55e;
+    --bg-main: #07100c;
+    --bg-sidebar: rgba(4, 15, 10, 0.96);
+    --bg-card: rgba(10, 24, 17, 0.78);
+    --bg-card-hover: rgba(17, 39, 27, 0.88);
+    --bg-input: rgba(12, 28, 20, 0.92);
+    --border: rgba(124, 177, 143, 0.18);
+    --border-light: rgba(124, 177, 143, 0.30);
+    --text-primary: #f3f7f4;
+    --text-secondary: #a7b7ad;
+    --text-muted: #72847a;
+    --green: #29d878;
+    --green-light: #57ed9a;
+    --green-dark: #0d4a2a;
+    --green-soft: rgba(25, 151, 78, 0.16);
+    --success: #35e58a;
     --danger: #dc2626;
-
-    --radius: 12px;
+    --radius: 16px;
+    --shadow: 0 18px 50px rgba(0, 0, 0, 0.30);
 }
 
+* { box-sizing: border-box; }
 
-/* ========================================
-   RESET
-======================================== */
-
-* {
-    box-sizing: border-box;
-}
-
-html,
-body {
+html, body {
     margin: 0;
     padding: 0;
     min-height: 100%;
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Inter, "Segoe UI", Arial, Helvetica, sans-serif;
     background: var(--bg-main);
     color: var(--text-primary);
 }
 
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background:
+        linear-gradient(90deg, rgba(3, 14, 9, 0.94) 0%, rgba(4, 18, 11, 0.78) 24%, rgba(4, 18, 11, 0.58) 55%, rgba(4, 18, 11, 0.72) 100%),
+        linear-gradient(180deg, rgba(2, 10, 6, 0.20) 0%, rgba(2, 10, 6, 0.72) 100%),
+        url("https://upload.wikimedia.org/wikipedia/commons/e/e2/Sugar_Cane_fields_S%C3%A3o_Paulo_State.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    filter: saturate(0.86);
+}
 
-/* ========================================
-   SIDEBAR
-======================================== */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        radial-gradient(circle at 72% 8%, rgba(72, 230, 132, 0.12), transparent 28%),
+        radial-gradient(circle at 20% 80%, rgba(28, 139, 76, 0.10), transparent 32%);
+}
 
 .sidebar {
-    background: var(--bg-sidebar);
-    border-right: 1px solid var(--border);
+    background: rgba(3, 14, 9, 0.93);
+    border-right: 1px solid rgba(121, 177, 139, 0.14);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
 }
 
-
-/* LOGO */
-
-.sidebar-logo h2,
-.logo-area h2 {
-    color: var(--text-primary);
-}
-
-.sidebar-logo span,
-.logo-area span {
-    color: var(--text-secondary);
-}
+.sidebar-logo h2, .logo-area h2 { color: var(--text-primary); }
+.sidebar-logo span, .logo-area span { color: var(--green); }
 
 .logo-icon {
-    background: var(--green-soft);
+    background: linear-gradient(145deg, rgba(43, 216, 120, 0.20), rgba(43, 216, 120, 0.06));
 }
 
-
-/* ========================================
-   MENU
-======================================== */
-
-.menu-item,
-.menu a {
-    color: var(--text-secondary);
+.menu-item, .menu a {
+    color: #9eafa5;
     background: transparent;
 }
 
-.menu-item:hover,
-.menu a:hover {
-    background: var(--bg-card-hover);
-    color: var(--text-primary);
+.menu-item:hover, .menu a:hover {
+    background: rgba(63, 202, 119, 0.09);
+    color: #eef7f1;
 }
 
-.menu-item.active,
-.menu a.active {
-    background: var(--green-dark);
+.menu-item.active, .menu a.active {
+    background: linear-gradient(90deg, rgba(33, 205, 109, 0.24), rgba(33, 205, 109, 0.08));
     color: #ffffff;
+    box-shadow: inset 3px 0 0 var(--green), 0 8px 25px rgba(16, 122, 64, 0.12);
 }
 
+.main-content { background: transparent; }
 
-/* ========================================
-   CONTEÚDO
-======================================== */
-
-.main-content {
-    background: var(--bg-main);
-}
-
-
-/* ========================================
-   TÍTULOS
-======================================== */
-
-h1,
-h2,
-h3,
-h4 {
-    color: var(--text-primary);
-}
-
-p {
-    color: var(--text-secondary);
-}
-
-
-/* ========================================
-   CARDS
-======================================== */
+h1, h2, h3, h4 { color: var(--text-primary); }
+p { color: var(--text-secondary); }
 
 .status-card,
 .metric-card,
@@ -144,178 +111,97 @@ p {
 .panel {
     background: var(--bg-card);
     border-color: var(--border);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
 }
 
-
-/* ========================================
-   LABELS
-======================================== */
-
-.section-label,
-.card-label,
-.info-label {
-    color: var(--text-secondary);
+.status-card:hover, .sensor-card:hover, .panel:hover {
+    border-color: var(--border-light);
 }
 
+.section-label, .card-label, .info-label { color: var(--text-muted); }
 
-/* ========================================
-   INPUTS / SELECTS
-======================================== */
-
-select,
-input,
-button {
-    font-family: Arial, Helvetica, sans-serif;
+select, input, button {
+    font-family: inherit;
 }
 
-select,
-input {
-    background: var(--bg-input);
+select, input {
+    background: rgba(7, 20, 13, 0.82);
     color: var(--text-primary);
     border: 1px solid var(--border);
 }
 
-select:focus,
-input:focus {
+select:hover, input:hover { border-color: var(--border-light); }
+
+select:focus, input:focus {
     border-color: var(--green);
     outline: none;
+    box-shadow: 0 0 0 3px rgba(41, 216, 120, 0.10);
 }
-
-
-/* ========================================
-   BOTÕES
-======================================== */
 
 button {
     border: 1px solid var(--border);
-    background: var(--bg-input);
+    background: rgba(9, 24, 16, 0.84);
     color: var(--text-primary);
 }
 
 button:hover {
-    border-color: var(--green);
+    border-color: rgba(41, 216, 120, 0.42);
+    background: rgba(21, 53, 34, 0.82);
 }
-
-
-/* BOTÃO PRINCIPAL */
 
 .btn-primary,
 .filter-button,
 button.primary,
 .primary-button {
-    background: var(--green);
-    color: #ffffff;
-    border-color: var(--green);
+    background: linear-gradient(135deg, #1bbd68, #29d878);
+    color: #031109;
+    border-color: transparent;
 }
 
 .btn-primary:hover,
 .filter-button:hover,
 button.primary:hover,
 .primary-button:hover {
-    background: var(--green-light);
+    background: linear-gradient(135deg, #29d878, #57ed9a);
 }
 
+#logoutButton, .logout { color: #93a59b; }
 
-/* BOTÃO SECUNDÁRIO */
-
-.btn-secondary,
-.secondary-button {
-    background: var(--bg-input);
-    color: var(--text-secondary);
-    border: 1px solid var(--border);
+#logoutButton:hover, .logout:hover {
+    background: rgba(255, 82, 92, 0.08);
+    color: #ff7b82;
+    border-color: rgba(255, 82, 92, 0.18);
 }
-
-.btn-secondary:hover,
-.secondary-button:hover {
-    background: var(--bg-card-hover);
-    color: var(--text-primary);
-}
-
-
-/* ========================================
-   LOGOUT
-======================================== */
-
-#logoutButton,
-.logout {
-    color: var(--text-secondary);
-}
-
-#logoutButton:hover,
-.logout:hover {
-    background: #2a1919;
-    color: var(--danger);
-}
-
-
-/* ========================================
-   STATUS ONLINE
-======================================== */
 
 .status-indicator {
-    color: var(--text-secondary);
+    color: #c7d5cd;
+    background: rgba(4, 20, 12, 0.72);
+    border-color: rgba(41, 216, 120, 0.20);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
 }
 
 .status-indicator span {
     background: var(--success);
+    box-shadow: 0 0 0 4px rgba(53, 229, 138, 0.10), 0 0 14px rgba(53, 229, 138, 0.65);
 }
-
-
-/* ========================================
-   STATUS DO ROVER
-======================================== */
 
 .rover-status {
-    background: var(--green-soft);
-    color: #7ddc85;
-    border: 1px solid #285a30;
-}
-
-
-/* ========================================
-   TABELAS
-======================================== */
-
-table {
+    background: transparent;
     color: var(--text-primary);
+    border: 0;
 }
 
-thead,
-th {
-    background: var(--bg-card-hover);
-}
+table { color: var(--text-primary); }
+thead, th { background: rgba(21, 43, 30, 0.78); }
+th { color: #9fb2a7; border-color: var(--border); }
+td { color: #e9f0eb; border-color: var(--border); }
+tbody tr:hover td { background: rgba(41, 216, 120, 0.05); }
 
-th {
-    color: var(--text-secondary);
-    border-color: var(--border);
-}
-
-td {
-    color: var(--text-primary);
-    border-color: var(--border);
-}
-
-tbody tr:hover td {
-    background: var(--bg-card-hover);
-}
-
-
-/* ========================================
-   TEXTOS SECUNDÁRIOS
-======================================== */
-
-small,
-.text-muted {
-    color: var(--text-muted);
-}
-
-
-/* ========================================
-   RESPONSIVIDADE GLOBAL
-======================================== */
+small, .text-muted { color: var(--text-muted); }
 
 @media (max-width: 600px) {
-
     .sidebar {
         position: relative;
         width: 100%;
@@ -323,8 +209,5 @@ small,
         border-right: none;
         border-bottom: 1px solid var(--border);
     }
-
-    .main-content {
-        margin-left: 0;
-    }
+    .main-content { margin-left: 0; }
 }
