@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histórico | Rover AgroTech</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<title>Histórico | Rover AgroTech</title>
-    <link rel="stylesheet" href="css/agro.css?v=20261001-3">
+    <link rel="stylesheet" href="css/agro.css?v=20261001-4">
 </head>
 <body>
-
     <aside class="sidebar">
  <div class="sidebar-logo"><div class="logo-icon">🌿</div><div><h2>Rover</h2><span>AGROTECH</span></div></div>
  <div class="nav-caption">CENTRAL DO CAMPO</div>
@@ -16,7 +15,6 @@
  <div class="sidebar-note"><p>Monitoramento agrícola</p><small>Projeto Rover AgroTech · TCC</small></div>
  <div class="sidebar-footer"><button id="logoutButton">Sair da conta</button></div>
  </aside>
-
     <main class="main-content">
         <header class="topbar">
             <div>
@@ -27,61 +25,52 @@
             <div class="status-indicator">Monitoramento agrícola</div>
         </header>
 
-        <section class="panel">
-            <div class="panel-header"><div><h2>Selecionar período</h2><p>Filtre as medições por rover e data.</p></div></div>
-            <div class="filters">
-                <div class="field">
-                    <label for="roverSelect">Rover</label>
-                    <select id="roverSelect"></select>
-                </div>
-
-                <div class="field">
-                    <label for="dataInicial">Data inicial</label>
-                    <input type="date" id="dataInicial">
-                </div>
-
-                <div class="field">
-                    <label for="dataFinal">Data final</label>
-                    <input type="date" id="dataFinal">
-                </div>
-
-                <button id="filtrarButton" class="primary-button">Filtrar</button>
-                <button id="limparButton" class="secondary-button">Limpar</button>
+        <section class="rover-selector">
+            <div>
+                <span class="section-label">Rover selecionado</span>
+                <h2>Histórico de coletas</h2>
             </div>
+            <select id="roverSelect" aria-label="Selecionar rover"></select>
         </section>
 
-        <section class="panel">
-            <div class="panel-header">
-                <div>
-                    <h2>Telemetrias</h2>
-                    <span id="totalRegistros">0 registros</span>
-                </div>
-                <button id="atualizarButton" class="secondary-button">Atualizar</button>
+        <section aria-labelledby="historyTitle">
+            <div class="section-header">
+                <h2 id="historyTitle">Medições do campo</h2>
+                <p>Consulte os dados recebidos no período escolhido.</p>
             </div>
-
-            <div id="mensagem" class="message" role="status" aria-live="polite"></div>
-
-            <div class="table-container">
-                <table aria-label="Histórico de telemetrias">
-                    <thead>
-                        <tr>
-                            <th>Data/Hora</th>
-                            <th>Temperatura</th>
-                            <th>Umidade do solo</th>
-                            <th>Umidade do ar</th>
-                            <th>Qualidade do ar</th>
-                            <th>RSSI LoRa</th>
-                            <th>Latitude</th>
-                            <th>Longitude</th>
-                        </tr>
-                    </thead>
-                    <tbody id="historicoBody"></tbody>
-                </table>
+            <div class="panel">
+                <div class="filters">
+                    <div class="field">
+                        <label for="dataInicial">Data inicial</label>
+                        <input type="date" id="dataInicial">
+                    </div>
+                    <div class="field">
+                        <label for="dataFinal">Data final</label>
+                        <input type="date" id="dataFinal">
+                    </div>
+                    <button id="filtrarButton" type="button" class="primary-button">Filtrar</button>
+                    <button id="limparButton" type="button" class="secondary-button">Limpar</button>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-header">
+                    <div><h2>Telemetrias</h2><span id="totalRegistros">0 registros</span></div>
+                    <button id="atualizarButton" type="button" class="secondary-button">Atualizar</button>
+                </div>
+                <div id="mensagem" class="message" role="status" aria-live="polite"></div>
+                <div class="table-container">
+                    <table aria-label="Histórico de telemetrias">
+                        <thead><tr>
+                            <th>Data/Hora</th><th>Temperatura</th><th>Umidade do solo</th>
+                            <th>Umidade do ar</th><th>Qualidade do ar</th><th>RSSI LoRa</th>
+                            <th>Latitude</th><th>Longitude</th>
+                        </tr></thead>
+                        <tbody id="historicoBody"></tbody>
+                    </table>
+                </div>
             </div>
         </section>
     </main>
-
     <script src="js/historico.js"></script>
 </body>
 </html>
-

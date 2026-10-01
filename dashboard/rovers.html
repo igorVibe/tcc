@@ -1,24 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rovers | Rover AgroTech</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<title>Rovers | Rover AgroTech</title>
-
-    <link rel="stylesheet" href="css/agro.css?v=20261001-3">
-
+    <link rel="stylesheet" href="css/agro.css?v=20261001-4">
 </head>
-
 <body>
-
     <aside class="sidebar">
  <div class="sidebar-logo"><div class="logo-icon">🌿</div><div><h2>Rover</h2><span>AGROTECH</span></div></div>
  <div class="nav-caption">CENTRAL DO CAMPO</div>
@@ -26,9 +15,7 @@
  <div class="sidebar-note"><p>Monitoramento agrícola</p><small>Projeto Rover AgroTech · TCC</small></div>
  <div class="sidebar-footer"><button id="logoutButton">Sair da conta</button></div>
  </aside>
-
     <main class="main-content">
-
         <header class="topbar">
             <div>
                 <span class="eyebrow">ROVER AGROTECH / ROVERS</span>
@@ -38,21 +25,25 @@
             <div class="status-indicator">Monitoramento agrícola</div>
         </header>
 
-        <section class="panel">
-            <div class="panel-header">
-                <div><h2>Rovers cadastrados</h2><p>Selecione um rover para abrir suas medições.</p></div>
-                <button id="refreshButton" class="secondary-button" type="button">Atualizar</button>
+        <section class="rover-selector">
+            <div>
+                <span class="section-label">Equipamentos</span>
+                <h2>Rovers cadastrados</h2>
+            </div>
+            <button id="refreshButton" type="button" class="secondary-button">Atualizar</button>
+        </section>
+
+        <section aria-labelledby="roversTitle">
+            <div class="section-header">
+                <h2 id="roversTitle">Seus rovers</h2>
+                <p>Selecione um equipamento para abrir o monitoramento.</p>
             </div>
             <div id="message" class="message" role="status" aria-live="polite"></div>
             <div id="roversContainer" class="rovers-container">
                 <div class="loading">Carregando rovers...</div>
             </div>
         </section>
-
     </main>
-
     <script src="js/rovers.js"></script>
-
 </body>
-
 </html>

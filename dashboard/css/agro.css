@@ -263,3 +263,7 @@ tbody tr:last-child td { border-bottom: 0; }
 @media (prefers-reduced-motion: reduce) {
     * { transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* Cartões de equipamento seguem os cartões de medição do dashboard. */
+.rover-card { border-top: 4px solid #6d873c; }
+.rover-card-header { min-height: 54px; }
