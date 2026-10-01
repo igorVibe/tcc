@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Login | Rover AgroTech</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<title>Login | Rover AgroTech</title>
 
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/global.css">
@@ -14,10 +15,10 @@
 
     <main class="login-container">
 
-        <section class="login-card">
+        <section class="login-intro"><span class="eyebrow">ROVER AGROTECH</span><h2>Um olhar mais perto<br>do campo.</h2><p>Solo, clima e localização reunidos para acompanhar cada coleta do seu rover agrícola.</p><div class="login-tags"><span>🌱 Solo</span><span>☀ Clima</span><span>⌖ Localização</span></div><small>PROJETO DE CONCLUSÃO DE CURSO</small></section><section class="login-card">
 
             <div class="logo">
-                <span>🤖</span>
+                <span>🌿</span>
                 <h1>Rover AgroTech</h1>
             </div>
 
@@ -33,7 +34,7 @@
                     <input
                         type="text"
                         id="username"
-                        placeholder="Digite seu usuário"
+                        placeholder="Digite seu usuário" autocomplete="username"
                         required
                     >
                 </div>
@@ -44,7 +45,7 @@
                     <input
                         type="password"
                         id="password"
-                        placeholder="Digite sua senha"
+                        placeholder="Digite sua senha" autocomplete="current-password"
                         required
                     >
                 </div>
@@ -53,7 +54,7 @@
                     Entrar
                 </button>
 
-                <p id="loginMessage" class="login-message"></p>
+                <p id="loginMessage" role="status" aria-live="polite" class="login-message"></p>
 
             </form>
 

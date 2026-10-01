@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Dashboard | Rover AgroTech</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<title>Dashboard | Rover AgroTech</title>
 
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
@@ -19,50 +20,12 @@
     ========================== -->
 
     <aside class="sidebar">
-
-        <div class="sidebar-logo">
-            <div class="logo-icon">🤖</div>
-
-            <div>
-                <h2>Rover</h2>
-                <span>AgroTech</span>
-            </div>
-        </div>
-
-
-        <nav class="menu">
-
-    <a href="index.html" class="menu-item active">
-        <span>📊</span>
-        Dashboard
-    </a>
-
-    <a href="rovers.html" class="menu-item">
-        <span>🤖</span>
-        Rovers
-    </a>
-
-    <a href="historico.html" class="menu-item">
-        <span>📈</span>
-        Histórico
-    </a>
-
-    <a href="localizacao.html" class="menu-item">
-        <span>📍</span>
-        Localização
-    </a>
-
-</nav>
-
-        <div class="sidebar-footer">
-
-            <button id="logoutButton">
-                🚪 Sair
-            </button>
-
-        </div>
-
-    </aside>
+ <div class="sidebar-logo"><div class="logo-icon">🌿</div><div><h2>Rover</h2><span>AGROTECH</span></div></div>
+ <div class="nav-caption">CENTRAL DO CAMPO</div>
+ <nav class="menu" aria-label="Navegação principal"><a href="index.html" class="menu-item active" aria-current="page"><span aria-hidden="true">▦</span>Visão geral</a><a href="rovers.html" class="menu-item " ><span aria-hidden="true">◈</span>Rovers</a><a href="historico.html" class="menu-item " ><span aria-hidden="true">≋</span>Histórico</a><a href="localizacao.html" class="menu-item " ><span aria-hidden="true">⌖</span>Localização</a></nav>
+ <div class="sidebar-note"><span>DO SOLO AO DADO</span><p>Tecnologia que acompanha o campo.</p><small>Projeto Rover AgroTech · TCC</small></div>
+ <div class="sidebar-footer"><button id="logoutButton">Sair da conta</button></div>
+ </aside>
 
 
     <!-- =========================
@@ -77,10 +40,10 @@
         <header class="topbar">
 
             <div>
-                <h1>Dashboard</h1>
+                <span class="eyebrow">ROVER AGROTECH / MONITORAMENTO</span><h1>Visão do campo</h1>
 
                 <p>
-                    Monitoramento do Rover AgroTech
+                    O que está acontecendo no solo e no ar.
                 </p>
             </div>
 
@@ -89,7 +52,7 @@
 
                 <div class="status-indicator">
                     <span></span>
-                    Sistema online
+                    Monitoramento agrícola
                 </div>
 
             </div>
@@ -110,7 +73,7 @@
                 </span>
 
                 <h2 id="selectedRover">
-                    ROVER-01
+                    Aguardando rover
                 </h2>
 
             </div>
@@ -136,7 +99,7 @@
             <div class="status-card">
 
                 <span class="status-icon">
-                    🟢
+                    ◉
                 </span>
 
                 <div>
@@ -146,7 +109,7 @@
                     </span>
 
                     <strong>
-                        Online
+                        Aguardando dados
                     </strong>
 
                 </div>
