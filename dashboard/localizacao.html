@@ -7,10 +7,7 @@
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <title>Localização | Rover AgroTech</title>
 
-    <link rel="stylesheet" href="css/localizacao.css">
     <link rel="stylesheet" href="css/global.css">
-
-    <!-- Leaflet -->
     <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -18,53 +15,40 @@
 </head>
 
 <body>
-
-    <!-- MENU LATERAL -->
     <aside class="sidebar">
  <div class="sidebar-logo"><div class="logo-icon">🌿</div><div><h2>Rover</h2><span>AGROTECH</span></div></div>
  <div class="nav-caption">CENTRAL DO CAMPO</div>
  <nav class="menu" aria-label="Navegação principal"><a href="index.html" class="menu-item " ><span aria-hidden="true">▦</span>Visão geral</a><a href="rovers.html" class="menu-item " ><span aria-hidden="true">◈</span>Rovers</a><a href="historico.html" class="menu-item " ><span aria-hidden="true">≋</span>Histórico</a><a href="localizacao.html" class="menu-item active" aria-current="page"><span aria-hidden="true">⌖</span>Localização</a></nav>
- <div class="sidebar-note"><span>DO SOLO AO DADO</span><p>Tecnologia que acompanha o campo.</p><small>Projeto Rover AgroTech · TCC</small></div>
+ <div class="sidebar-note"><p>Monitoramento agrícola</p><small>Projeto Rover AgroTech · TCC</small></div>
  <div class="sidebar-footer"><button id="logoutButton">Sair da conta</button></div>
  </aside>
-
-
-    <!-- CONTEÚDO PRINCIPAL -->
     <main class="main-content">
 
-        <header class="page-header">
-
+        <header class="topbar">
             <div>
+                <span class="eyebrow">ROVER AGROTECH / LOCALIZAÇÃO</span>
                 <h1>Localização</h1>
-                <p>Acompanhe a posição do Rover em tempo real.</p>
+                <p>Acompanhe a última posição recebida do rover.</p>
             </div>
-
-            <div class="rover-selector">
-
-                <label for="roverSelect">Rover</label>
-
-                <select id="roverSelect">
-                    <option value="">Carregando...</option>
-                </select>
-
-            </div>
-
+            <div class="status-indicator">Monitoramento agrícola</div>
         </header>
 
+        <section class="rover-selector">
+            <div><span class="section-label">Rover selecionado</span><h2>Localização no campo</h2></div>
+            <select id="roverSelect" aria-label="Selecionar rover"><option value="">Carregando...</option></select>
+        </section>
+        <section class="panel map-panel">
 
-        <!-- CARD DO MAPA -->
-        <section class="map-card">
-
-            <div class="map-card-header">
+            <div class="panel-header">
 
                 <div>
-                    <h2>📍 Localização do Rover</h2>
-                    <p id="locationStatus">
+                    <h2>Posição do rover</h2>
+                    <p id="locationStatus" role="status" aria-live="polite">
                         Aguardando localização...
                     </p>
                 </div>
 
-                <div class="coordinates" id="coordinates">
+                <div class="location-coordinates" id="coordinates">
                     Latitude: -- <br>
                     Longitude: --
                 </div>
@@ -74,53 +58,47 @@
             <div id="map"></div>
 
         </section>
-
-
-        <!-- INFORMAÇÕES DA LOCALIZAÇÃO -->
         <section class="location-info">
 
-            <div class="info-card">
+            <div class="status-card">
 
-                <span class="info-icon">🌿</span>
+                <span class="status-icon">🌿</span>
 
                 <div>
-                    <span class="info-label">Rover</span>
+                    <span class="card-label">Rover</span>
                     <strong id="roverName">--</strong>
                 </div>
 
             </div>
 
+            <div class="status-card">
 
-            <div class="info-card">
-
-                <span class="info-icon">📍</span>
+                <span class="status-icon">📍</span>
 
                 <div>
-                    <span class="info-label">Latitude</span>
+                    <span class="card-label">Latitude</span>
                     <strong id="latitude">--</strong>
                 </div>
 
             </div>
 
+            <div class="status-card">
 
-            <div class="info-card">
-
-                <span class="info-icon">📍</span>
+                <span class="status-icon">📍</span>
 
                 <div>
-                    <span class="info-label">Longitude</span>
+                    <span class="card-label">Longitude</span>
                     <strong id="longitude">--</strong>
                 </div>
 
             </div>
 
+            <div class="status-card">
 
-            <div class="info-card">
-
-                <span class="info-icon">🕒</span>
+                <span class="status-icon">🕒</span>
 
                 <div>
-                    <span class="info-label">Última atualização</span>
+                    <span class="card-label">Última atualização</span>
                     <strong id="lastUpdate">--</strong>
                 </div>
 
@@ -129,15 +107,10 @@
         </section>
 
     </main>
-
-
-    <!-- Leaflet -->
     <script
         src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         >
     </script>
-
-    <!-- JavaScript da página -->
     <script src="js/localizacao.js"></script>
 
 </body>

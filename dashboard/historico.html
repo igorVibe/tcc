@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <title>Histórico | Rover AgroTech</title>
-    <link rel="stylesheet" href="css/historico.css">
     <link rel="stylesheet" href="css/global.css">
 </head>
 <body>
@@ -14,20 +13,22 @@
  <div class="sidebar-logo"><div class="logo-icon">🌿</div><div><h2>Rover</h2><span>AGROTECH</span></div></div>
  <div class="nav-caption">CENTRAL DO CAMPO</div>
  <nav class="menu" aria-label="Navegação principal"><a href="index.html" class="menu-item " ><span aria-hidden="true">▦</span>Visão geral</a><a href="rovers.html" class="menu-item " ><span aria-hidden="true">◈</span>Rovers</a><a href="historico.html" class="menu-item active" aria-current="page"><span aria-hidden="true">≋</span>Histórico</a><a href="localizacao.html" class="menu-item " ><span aria-hidden="true">⌖</span>Localização</a></nav>
- <div class="sidebar-note"><span>DO SOLO AO DADO</span><p>Tecnologia que acompanha o campo.</p><small>Projeto Rover AgroTech · TCC</small></div>
+ <div class="sidebar-note"><p>Monitoramento agrícola</p><small>Projeto Rover AgroTech · TCC</small></div>
  <div class="sidebar-footer"><button id="logoutButton">Sair da conta</button></div>
  </aside>
 
     <main class="main-content">
         <header class="topbar">
             <div>
+                <span class="eyebrow">ROVER AGROTECH / HISTÓRICO</span>
                 <h1>Histórico</h1>
-                <p>Registro das telemetrias recebidas pelo Rover AgroTech</p>
+                <p>Consulte as medições de cada coleta.</p>
             </div>
-            <span class="status">Monitoramento agrícola</span>
+            <div class="status-indicator">Monitoramento agrícola</div>
         </header>
 
         <section class="panel">
+            <div class="panel-header"><div><h2>Selecionar período</h2><p>Filtre as medições por rover e data.</p></div></div>
             <div class="filters">
                 <div class="field">
                     <label for="roverSelect">Rover</label>
@@ -44,7 +45,7 @@
                     <input type="date" id="dataFinal">
                 </div>
 
-                <button id="filtrarButton" class="primary-button">🔎 Filtrar</button>
+                <button id="filtrarButton" class="primary-button">Filtrar</button>
                 <button id="limparButton" class="secondary-button">Limpar</button>
             </div>
         </section>
@@ -55,13 +56,13 @@
                     <h2>Telemetrias</h2>
                     <span id="totalRegistros">0 registros</span>
                 </div>
-                <button id="atualizarButton" class="secondary-button">🔄 Atualizar</button>
+                <button id="atualizarButton" class="secondary-button">Atualizar</button>
             </div>
 
-            <div id="mensagem" class="message"></div>
+            <div id="mensagem" class="message" role="status" aria-live="polite"></div>
 
             <div class="table-container">
-                <table>
+                <table aria-label="Histórico de telemetrias">
                     <thead>
                         <tr>
                             <th>Data/Hora</th>

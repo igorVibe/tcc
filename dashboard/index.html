@@ -8,61 +8,30 @@
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <title>Dashboard | Rover AgroTech</title>
 
-    <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
     <link rel="stylesheet" href="css/global.css">
 </head>
 
 <body>
 
-    <!-- =========================
-         SIDEBAR
-    ========================== -->
-
     <aside class="sidebar">
  <div class="sidebar-logo"><div class="logo-icon">🌿</div><div><h2>Rover</h2><span>AGROTECH</span></div></div>
  <div class="nav-caption">CENTRAL DO CAMPO</div>
  <nav class="menu" aria-label="Navegação principal"><a href="index.html" class="menu-item active" aria-current="page"><span aria-hidden="true">▦</span>Visão geral</a><a href="rovers.html" class="menu-item " ><span aria-hidden="true">◈</span>Rovers</a><a href="historico.html" class="menu-item " ><span aria-hidden="true">≋</span>Histórico</a><a href="localizacao.html" class="menu-item " ><span aria-hidden="true">⌖</span>Localização</a></nav>
- <div class="sidebar-note"><span>DO SOLO AO DADO</span><p>Tecnologia que acompanha o campo.</p><small>Projeto Rover AgroTech · TCC</small></div>
+ <div class="sidebar-note"><p>Monitoramento agrícola</p><small>Projeto Rover AgroTech · TCC</small></div>
  <div class="sidebar-footer"><button id="logoutButton">Sair da conta</button></div>
  </aside>
 
-
-    <!-- =========================
-         CONTEÚDO PRINCIPAL
-    ========================== -->
-
     <main class="main-content">
 
-
-        <!-- HEADER -->
-
         <header class="topbar">
-
             <div>
-                <span class="eyebrow">ROVER AGROTECH / MONITORAMENTO</span><h1>Visão do campo</h1>
-
-                <p>
-                    O que está acontecendo no solo e no ar.
-                </p>
+                <span class="eyebrow">ROVER AGROTECH / MONITORAMENTO</span>
+                <h1>Visão do campo</h1>
+                <p>O que está acontecendo no solo e no ar.</p>
             </div>
-
-
-            <div class="user-area">
-
-                <div class="status-indicator">
-                    <span></span>
-                    Monitoramento agrícola
-                </div>
-
-            </div>
-
+            <div class="status-indicator">Monitoramento agrícola</div>
         </header>
-
-
-        <!-- =========================
-             SELEÇÃO DO ROVER
-        ========================== -->
 
         <section class="rover-selector">
 
@@ -78,8 +47,7 @@
 
             </div>
 
-
-            <select id="roverSelect">
+            <select id="roverSelect" aria-label="Selecionar rover">
 
                 <option value="ROVER-01">
                     ROVER-01
@@ -88,11 +56,6 @@
             </select>
 
         </section>
-
-
-        <!-- =========================
-             STATUS DO ROVER
-        ========================== -->
 
         <section class="rover-status">
 
@@ -116,7 +79,6 @@
 
             </div>
 
-
             <div class="status-card">
 
                 <span class="status-icon">
@@ -137,7 +99,6 @@
 
             </div>
 
-
             <div class="status-card">
 
                 <span class="status-icon">
@@ -157,7 +118,6 @@
                 </div>
 
             </div>
-
 
             <div class="status-card">
 
@@ -181,11 +141,6 @@
 
         </section>
 
-
-        <!-- =========================
-             SENSORES
-        ========================== -->
-
         <section>
 
             <div class="section-header">
@@ -204,11 +159,7 @@
 
             </div>
 
-
             <div class="sensor-grid">
-
-
-                <!-- UMIDADE DO SOLO -->
 
                 <div class="sensor-card">
 
@@ -238,9 +189,6 @@
 
                 </div>
 
-
-                <!-- UMIDADE DO AR -->
-
                 <div class="sensor-card">
 
                     <div class="sensor-card-header">
@@ -268,9 +216,6 @@
                     </div>
 
                 </div>
-
-
-                <!-- TEMPERATURA -->
 
                 <div class="sensor-card">
 
@@ -300,9 +245,6 @@
 
                 </div>
 
-
-                <!-- QUALIDADE DO AR -->
-
                 <div class="sensor-card">
 
                     <div class="sensor-card-header">
@@ -327,20 +269,11 @@
 
                 </div>
 
-
             </div>
 
         </section>
 
-
-        <!-- =========================
-             GPS + HISTÓRICO
-        ========================== -->
-
         <section class="bottom-grid">
-
-
-            <!-- LOCALIZAÇÃO -->
 
             <div class="panel">
 
@@ -349,7 +282,7 @@
                     <div>
 
                         <h2>
-                            📍 Localização
+                            Localização
                         </h2>
 
                         <p>
@@ -359,7 +292,6 @@
                     </div>
 
                 </div>
-
 
                 <div class="coordinates">
 
@@ -374,7 +306,6 @@
                         </strong>
 
                     </div>
-
 
                     <div>
 
@@ -394,9 +325,6 @@
 
             </div>
 
-
-            <!-- HISTÓRICO -->
-
             <div class="panel">
 
                 <div class="panel-header">
@@ -404,7 +332,7 @@
                     <div>
 
                         <h2>
-                            📈 Histórico
+                            Histórico
                         </h2>
 
                         <p>
@@ -415,7 +343,6 @@
 
                 </div>
 
-
                 <div class="history-charts">
 
                     <div class="chart-box">
@@ -425,7 +352,6 @@
                         </div>
                 </div>
 
-
                 <div class="chart-box">
                     <h3>🌱 Umidade do solo</h3>
                     <div class="chart-container">
@@ -433,14 +359,12 @@
                     </div>
                 </div>
 
-
                 <div class="chart-box">
                     <h3>💧 Umidade do ar</h3>
                     <div class="chart-container">
                         <canvas id="airHumidityChart"></canvas>
                     </div>
                 </div>
-
 
                 <div class="chart-box">
                  <h3>📡 Sinal LoRa</h3>
@@ -461,12 +385,9 @@
 
             </div>
 
-
         </section>
 
-
     </main>
-
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
