@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 :root {
     --bg-main: #f3f1e8;
     --bg-card: #fffef8;
@@ -267,3 +268,7 @@ tbody tr:last-child td { border-bottom: 0; }
 /* Cartões de equipamento seguem os cartões de medição do dashboard. */
 .rover-card { border-top: 4px solid #6d873c; }
 .rover-card-header { min-height: 54px; }
+=======
+/* Compatibilidade: os estilos compartilhados ficam em global.css. */
+@import url("global.css?v=20261002-1");
+>>>>>>> e824c72 (tccnovo)

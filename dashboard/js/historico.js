@@ -245,3 +245,4 @@ logoutButton.addEventListener("click", () => {
 });
 
 carregarRovers();
+

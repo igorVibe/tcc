@@ -1,1 +1,6 @@
+<<<<<<< HEAD
 @import url("agro.css?v=20261001-4");
+=======
+/* Compatibilidade: os estilos compartilhados ficam em global.css. */
+@import url("global.css?v=20261002-1");
+>>>>>>> e824c72 (tccnovo)
