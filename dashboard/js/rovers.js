@@ -468,6 +468,11 @@ linkRoverForm.addEventListener("submit", async evento => {
     if (cadastroEmAndamento) return;
     newRoverId.value = newRoverId.value.trim();
     newRoverName.value = newRoverName.value.trim();
+    if (!newRoverId.value || !newRoverName.value) {
+        mostrarMensagem(linkRoverMessage, "Preencha o ID do rover e o nome.", "error");
+        (!newRoverId.value ? newRoverId : newRoverName).focus();
+        return;
+    }
     if (!linkRoverForm.reportValidity()) return;
     if (newRoverId.value.length > 50 || newRoverName.value.length > 100) {
         mostrarMensagem(linkRoverMessage, "O ID deve ter até 50 caracteres e o nome até 100.", "error");

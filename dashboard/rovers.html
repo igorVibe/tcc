@@ -5,15 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rovers | Rover AgroTech</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<<<<<<< HEAD
-    <link rel="stylesheet" href="css/agro.css?v=20261001-4">
+    <link rel="stylesheet" href="css/agro.css?v=20261002-olive-1">
+    <link rel="stylesheet" href="css/rovers.css?v=20261002-link-1">
 </head>
 <body>
-=======
-    <link rel="stylesheet" href="css/global.css?v=20261002-8">
-</head>
-<body class="app-page">
->>>>>>> e824c72 (tccnovo)
     <aside class="sidebar">
  <div class="sidebar-logo"><div class="logo-icon"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 19C3 8 12 4 20 4c0 10-5 17-15 15Z"/><path d="m4 21 12-12"/></svg></div><div><h2>Rover</h2><span>AGROTECH</span></div></div>
  <div class="nav-caption">CENTRAL DO CAMPO</div>
@@ -37,14 +32,10 @@
                 <span class="section-label">Equipamentos</span>
                 <h2>Rovers cadastrados</h2>
             </div>
-<<<<<<< HEAD
-            <button id="refreshButton" type="button" class="secondary-button">Atualizar</button>
-=======
             <div class="rover-actions">
-                <button id="refreshButton" type="button" class="secondary-button">Atualizar</button>
                 <button id="linkRoverButton" type="button" class="primary-button">Vincular rover</button>
+                <button id="refreshButton" type="button" class="secondary-button">Atualizar</button>
             </div>
->>>>>>> e824c72 (tccnovo)
         </section>
 
         <section aria-labelledby="roversTitle">
@@ -58,30 +49,25 @@
             </div>
         </section>
     </main>
-<<<<<<< HEAD
-    <script src="js/rovers.js"></script>
-=======
-    <dialog id="linkRoverModal" class="rover-modal" aria-labelledby="linkRoverTitle" aria-describedby="linkRoverDescription">
+    <dialog id="linkRoverModal" class="rover-dialog" aria-labelledby="linkRoverTitle" aria-describedby="linkRoverDescription">
         <form id="linkRoverForm">
             <div class="panel-header"><h2 id="linkRoverTitle">Vincular rover</h2></div>
-            <p id="linkRoverDescription">Cadastre o rover no sistema. Este registro não conecta o equipamento nem gera dados de sensores.</p>
+            <p id="linkRoverDescription">Cadastre o equipamento no sistema. Esse cadastro n?o confirma a conex?o do rover.</p>
             <div class="field">
                 <label for="newRoverId">ID do rover</label>
-                <input id="newRoverId" name="id_rover" type="text" required maxlength="50" placeholder="Ex.: ROVER-01" aria-describedby="roverIdHint" autofocus>
-                <small id="roverIdHint">Use o ID configurado no equipamento. Até 50 caracteres.</small>
+                <input id="newRoverId" name="id_rover" type="text" maxlength="50" required autofocus autocomplete="off" placeholder="Ex.: ROVER-03">
             </div>
             <div class="field">
                 <label for="newRoverName">Nome</label>
-                <input id="newRoverName" name="nome" type="text" required maxlength="100" placeholder="Nome do rover">
+                <input id="newRoverName" name="nome" type="text" maxlength="100" required autocomplete="off" placeholder="Nome do equipamento">
             </div>
-            <div id="linkRoverMessage" class="message" role="status" aria-live="polite"></div>
+            <p id="linkRoverMessage" class="message" role="status" aria-live="polite" aria-atomic="true"></p>
             <div class="rover-actions">
-                <button id="cancelLinkRoverButton" type="button" class="secondary-button">Cancelar</button>
+                <button id="cancelLinkRoverButton" type="button">Cancelar</button>
                 <button id="confirmLinkRoverButton" type="submit" class="primary-button">Confirmar cadastro</button>
             </div>
         </form>
     </dialog>
-    <script src="js/rovers.js?v=20261002-8"></script>
->>>>>>> e824c72 (tccnovo)
+    <script src="js/rovers.js?v=20261002-link-1"></script>
 </body>
 </html>
