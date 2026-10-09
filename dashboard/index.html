@@ -9,16 +9,23 @@
 <title>Dashboard | Rover AgroTech</title>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-    <link rel="stylesheet" href="css/agro.css?v=20261002-olive-1">
+
+    <link rel="stylesheet" href="css/dashboard.css?v=20261009-7">
+
 </head>
 
-<body class="app-page">
+<body class="app-page dashboard-page">
 
     <aside class="sidebar">
  <div class="sidebar-logo"><div class="logo-icon"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 19C3 8 12 4 20 4c0 10-5 17-15 15Z"/><path d="m4 21 12-12"/></svg></div><div><h2>Rover</h2><span>AGROTECH</span></div></div>
  <div class="nav-caption">CENTRAL DO CAMPO</div>
  <nav class="menu" aria-label="Navegação principal"><a href="index.html" class="menu-item active" aria-current="page"><span aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>Visão geral</a><a href="rovers.html" class="menu-item " ><span aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 16V9h12l4 7M4 12h15M10 9V5h4"/><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/></svg></span>Rovers</a><a href="historico.html" class="menu-item " ><span aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 11a9 9 0 1 1 2 7M3 4v7h7M12 7v5l3 2"/></svg></span>Histórico</a><a href="localizacao.html" class="menu-item " ><span aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></span>Localização</a></nav>
  <div class="sidebar-note"><p>Monitoramento agrícola</p><small>Projeto Rover AgroTech · TCC</small></div>
+ <div class="sidebar-account" aria-label="Conta: Igor, Administrador">
+     <span class="account-avatar" aria-hidden="true">I</span>
+     <div class="account-details"><strong>Igor</strong><span>Administrador</span></div>
+     <span class="account-status" role="img" aria-label="Online"></span>
+ </div>
  <div class="sidebar-footer"><button id="logoutButton">Sair da conta</button></div>
  </aside>
 
@@ -35,6 +42,8 @@
         <div class="field-banner" aria-hidden="true"></div>
 
         <section class="rover-selector">
+
+            <img class="selected-rover-image" src="imgs/rover01.png" alt="Rover agrícola">
 
             <div>
 
@@ -72,7 +81,7 @@
                         Status
                     </span>
 
-                    <strong>
+                    <strong id="roverConnectionStatus" aria-live="polite">
                         Aguardando dados
                     </strong>
 
@@ -187,6 +196,7 @@
                         </small>
 
                     </div>
+                    <div class="mini-chart-container"><canvas id="soilHumidityMiniChart" aria-label="Histórico recente da umidade do solo"></canvas></div>
 
                 </div>
 
@@ -215,6 +225,7 @@
                         </small>
 
                     </div>
+                    <div class="mini-chart-container"><canvas id="airHumidityMiniChart" aria-label="Histórico recente da umidade do ar"></canvas></div>
 
                 </div>
 
@@ -243,6 +254,7 @@
                         </small>
 
                     </div>
+                    <div class="mini-chart-container"><canvas id="temperatureMiniChart" aria-label="Histórico recente da temperatura"></canvas></div>
 
                 </div>
 
@@ -267,6 +279,7 @@
                         </span>
 
                     </div>
+                    <div class="mini-chart-container"><canvas id="airQualityMiniChart" aria-label="Histórico recente da qualidade do ar"></canvas></div>
 
                 </div>
 
@@ -276,7 +289,7 @@
 
         <section class="bottom-grid">
 
-            <div class="panel">
+            <div class="panel map-panel">
 
                 <div class="panel-header">
 
@@ -326,7 +339,7 @@
 
             </div>
 
-            <div class="panel">
+            <div class="panel history-panel">
 
                 <div class="panel-header">
 
@@ -337,9 +350,15 @@
                         </h2>
 
                         <p>
-                            Últimas medições
+                            Evolução dos principais indicadores
                         </p>
 
+                    </div>
+                    <div class="period-filters" role="group" aria-label="Filtrar histórico por período">
+                        <button type="button" class="period-filter" data-period="1" aria-pressed="false">1h</button>
+                        <button type="button" class="period-filter" data-period="6" aria-pressed="false">6h</button>
+                        <button type="button" class="period-filter" data-period="24" aria-pressed="true">24h</button>
+                        <button type="button" class="period-filter" data-period="168" aria-pressed="false">7d</button>
                     </div>
 
                 </div>
@@ -392,6 +411,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="js/sidebar.js"></script>
 <script src="js/dashboard.js"></script>
 
 </body>

@@ -28,13 +28,15 @@ const lastUpdate = document.getElementById("lastUpdate");
 const coordinates = document.getElementById("coordinates");
 const locationStatus = document.getElementById("locationStatus");
 const logoutButton = document.getElementById("logoutButton");
+const refreshLocationButton = document.getElementById("refreshLocationButton");
+const openMapButton = document.getElementById("openMapButton");
 
 
 // ========================================
 // MAPA
 // ========================================
 
-let map = L.map("map").setView([-23.5505, -46.6333], 15);
+let map = L.map("map").fitWorld();
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "&copy; OpenStreetMap contributors"
@@ -86,6 +88,7 @@ async function carregarRovers() {
             `;
 
             locationStatus.textContent = "Nenhum Rover cadastrado.";
+            locationStatus.dataset.state = "unavailable";
 
             return;
         }
@@ -137,6 +140,7 @@ async function carregarRovers() {
 
         locationStatus.textContent =
             "Erro ao carregar os rovers.";
+        locationStatus.dataset.state = "error";
 
     }
 
@@ -150,13 +154,22 @@ async function carregarRovers() {
 async function carregarLocalizacao(idRover) {
 
     if (!idRover) {
+        limparLocalizacao();
+        roverName.textContent = "--";
+        locationStatus.textContent =
+            "Selecione um rover para consultar a localização.";
+        locationStatus.dataset.state = "unavailable";
         return;
     }
 
     try {
 
+        roverName.textContent =
+            obterNomeRover(idRover) || idRover;
+        limparLocalizacao();
         locationStatus.textContent =
             "Buscando última localização...";
+        locationStatus.dataset.state = "loading";
 
 
         const response = await fetch(
@@ -199,6 +212,7 @@ async function carregarLocalizacao(idRover) {
 
             locationStatus.textContent =
                 "Nenhuma telemetria encontrada para este Rover.";
+            locationStatus.dataset.state = "unavailable";
 
             return;
         }
@@ -223,24 +237,30 @@ async function carregarLocalizacao(idRover) {
         // VERIFICAR COORDENADAS
         // ========================================
 
-        const lat = parseFloat(
-            ultimaTelemetria.latitude
-        );
-
-        const lng = parseFloat(
-            ultimaTelemetria.longitude
-        );
+        const latitude = ultimaTelemetria.latitude;
+        const longitude = ultimaTelemetria.longitude;
+        const lat = Number(latitude);
+        const lng = Number(longitude);
 
 
         if (
-            Number.isNaN(lat) ||
-            Number.isNaN(lng)
+            latitude == null ||
+            String(latitude).trim() === "" ||
+            longitude == null ||
+            String(longitude).trim() === "" ||
+            !Number.isFinite(lat) ||
+            !Number.isFinite(lng) ||
+            lat < -90 ||
+            lat > 90 ||
+            lng < -180 ||
+            lng > 180
         ) {
 
             limparLocalizacao();
 
             locationStatus.textContent =
                 "O Rover ainda não possui localização.";
+            locationStatus.dataset.state = "unavailable";
 
             return;
         }
@@ -275,6 +295,7 @@ async function carregarLocalizacao(idRover) {
 
         locationStatus.textContent =
             "Localização atualizada com sucesso.";
+        locationStatus.dataset.state = "success";
 
 
         // ========================================
@@ -293,6 +314,7 @@ async function carregarLocalizacao(idRover) {
 
         locationStatus.textContent =
             "Erro ao carregar a localização.";
+        locationStatus.dataset.state = "error";
 
     }
 
@@ -326,6 +348,9 @@ function atualizarMarcador(lat, lng, nome) {
         Longitude: ${lng.toFixed(8)}
     `);
 
+    openMapButton.href =
+        `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lng}#map=17/${lat}/${lng}`;
+    openMapButton.setAttribute("aria-disabled", "false");
 
     roverMarker.openPopup();
 
@@ -346,10 +371,11 @@ function atualizarMarcador(lat, lng, nome) {
 
 function limparLocalizacao() {
 
-    roverName.textContent = "--";
     latitudeElement.textContent = "--";
     longitudeElement.textContent = "--";
     lastUpdate.textContent = "--";
+    openMapButton.removeAttribute("href");
+    openMapButton.setAttribute("aria-disabled", "true");
 
     coordinates.innerHTML = `
         Latitude: --<br>
@@ -364,6 +390,8 @@ function limparLocalizacao() {
         roverMarker = null;
 
     }
+
+    map.fitWorld();
 
 }
 
@@ -443,6 +471,13 @@ roverSelect.addEventListener(
 
         await carregarLocalizacao(idRover);
 
+    }
+);
+
+refreshLocationButton.addEventListener(
+    "click",
+    async function () {
+        await carregarLocalizacao(roverSelect.value);
     }
 );
 

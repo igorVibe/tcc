@@ -1,1 +1,288 @@
-@import url("agro.css?v=20261002-restored-1");
+
+@import url("agro.css?v=20261009-6");
+
+/* Compatibilidade: os estilos compartilhados ficam em global.css. */
+@import url("global.css?v=20261009-7");
+
+body.dashboard-page {
+    --bg-main: var(--color-page);
+    --bg-card: var(--color-card);
+    --bg-card-hover: var(--color-soft);
+    --border: var(--color-border);
+    --text-primary: var(--color-text);
+    --text-secondary: var(--color-text-secondary);
+    --text-muted: var(--color-text-secondary);
+    --green: var(--color-primary);
+    --green-light: var(--color-highlight);
+    --green-dark: var(--color-sidebar);
+    --shadow: 0 5px 18px rgba(20, 50, 36, .07);
+    background: var(--bg-main);
+    color: var(--text-primary);
+}
+
+.dashboard-page .main-content {
+    padding: 0 22px 42px;
+    background: var(--bg-main);
+}
+
+.dashboard-page .sidebar {
+    background: var(--sidebar-bg);
+}
+
+.dashboard-page .sidebar-logo { margin-bottom: 34px; }
+.dashboard-page .logo-icon { background: var(--color-soft); color: var(--color-primary); }
+.dashboard-page .menu-item.active {
+    background: var(--sidebar-active);
+    color: var(--color-card);
+}
+.dashboard-page .menu-item.active:hover { background: var(--sidebar-active); }
+
+.dashboard-page .topbar {
+    min-height: 150px;
+    margin: 0 -22px 16px;
+    padding: 26px clamp(22px, 3vw, 42px);
+    color: var(--color-card);
+    background:
+        linear-gradient(90deg, rgba(4, 34, 24, .78), rgba(4, 34, 24, .08)),
+        url("../imgs/canavial.png") center 54% / cover no-repeat;
+}
+
+.dashboard-page .topbar > div:first-child { position: relative; z-index: 1; }
+.dashboard-page .topbar .eyebrow { color: rgba(255, 255, 255, .82); }
+.dashboard-page .topbar h1 { color: var(--color-card); font-size: clamp(30px, 3vw, 40px); }
+.dashboard-page .topbar p { color: rgba(255, 255, 255, .9); font-size: 16px; }
+.dashboard-page .status-indicator {
+    border: 1px solid rgba(255, 255, 255, .26);
+    background: rgba(16, 34, 25, .54);
+    color: var(--color-card);
+}
+.dashboard-page .field-banner { display: none; }
+
+.dashboard-page .rover-selector {
+    display: grid;
+    grid-template-columns: 132px minmax(0, 1fr) minmax(230px, 310px);
+    gap: 18px;
+    min-height: 108px;
+    margin-bottom: 14px;
+    padding: 12px 18px;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    background: var(--bg-card);
+    box-shadow: var(--shadow);
+}
+.dashboard-page .selected-rover-image {
+    width: 122px;
+    height: 82px;
+    object-fit: contain;
+}
+.dashboard-page .rover-selector h2 {
+    margin-top: 3px;
+    color: var(--text-primary);
+    font-size: clamp(18px, 1.5vw, 22px);
+}
+.dashboard-page .rover-selector .section-label,
+.dashboard-page .rover-status .card-label { color: var(--text-secondary); }
+.dashboard-page .rover-selector select {
+    width: 100%;
+    min-width: 0;
+    border-color: var(--border);
+}
+
+.dashboard-page .rover-status {
+    gap: 12px;
+    margin-bottom: 20px;
+}
+.dashboard-page .status-card {
+    min-height: 84px;
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg-card);
+    box-shadow: var(--shadow);
+}
+.dashboard-page .status-icon,
+.dashboard-page .sensor-icon {
+    width: 44px;
+    height: 44px;
+    flex-basis: 44px;
+    border-radius: 50%;
+    background: var(--color-soft);
+    color: var(--color-primary);
+}
+.dashboard-page .status-card strong {
+    color: var(--text-primary);
+    font-size: clamp(15px, 1.2vw, 19px);
+}
+
+.dashboard-page .section-header { margin-bottom: 10px; }
+.dashboard-page .section-header h2,
+.dashboard-page .panel-header h2 {
+    color: var(--text-primary);
+    font-size: 23px;
+    letter-spacing: -.35px;
+}
+.dashboard-page .section-header p,
+.dashboard-page .panel-header p { color: var(--text-secondary); }
+.dashboard-page .sensor-grid {
+    gap: 12px;
+    margin: 10px 0 16px;
+}
+.dashboard-page .sensor-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 172px;
+    padding: 15px 16px 10px;
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--color-highlight);
+    border-radius: 12px;
+    background: var(--bg-card);
+    box-shadow: var(--shadow);
+}
+.dashboard-page .sensor-card:nth-child(2),
+.dashboard-page .sensor-card:nth-child(3),
+.dashboard-page .sensor-card:nth-child(4) { border-top-color: var(--color-highlight); }
+.dashboard-page .sensor-card-header {
+    gap: 10px;
+    margin-bottom: 9px;
+}
+.dashboard-page .sensor-title { color: var(--color-text-secondary); font-weight: 500; }
+.dashboard-page .sensor-value {
+    padding-left: 54px;
+    color: var(--color-text);
+    font-size: clamp(28px, 2.2vw, 34px);
+    line-height: 1.1;
+}
+.dashboard-page .sensor-value small { color: var(--color-text-secondary); font-size: 15px; }
+.dashboard-page .mini-chart-container {
+    position: relative;
+    height: 39px;
+    margin-top: auto;
+}
+.dashboard-page .mini-chart-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.dashboard-page .bottom-grid {
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+    gap: 14px;
+    align-items: stretch;
+}
+.dashboard-page .history-panel { order: 1; }
+.dashboard-page .map-panel { order: 2; }
+.dashboard-page .panel {
+    margin-bottom: 0;
+    padding: 17px;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    background: var(--bg-card);
+    box-shadow: var(--shadow);
+}
+.dashboard-page .panel-header {
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+.dashboard-page .history-panel .panel-header { flex-wrap: wrap; }
+.dashboard-page .history-charts { gap: 10px; }
+.dashboard-page .chart-box {
+    padding: 11px;
+    border: 1px solid var(--color-border);
+    border-radius: 9px;
+    background: var(--color-card);
+}
+.dashboard-page .chart-box h3 { color: var(--color-text-secondary); font-size: 13px; }
+.dashboard-page .chart-container { height: 132px; }
+.dashboard-page .coordinates { gap: 9px; }
+.dashboard-page .coordinates div {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: var(--color-soft);
+}
+.dashboard-page .coordinates span { color: var(--text-secondary); }
+.dashboard-page .coordinates strong { color: var(--text-primary); }
+.dashboard-page #map {
+    height: 365px;
+    margin-top: 10px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--color-soft);
+}
+.dashboard-page .leaflet-control-zoom a,
+.dashboard-page .leaflet-popup-content-wrapper,
+.dashboard-page .leaflet-popup-tip { background: var(--color-card); color: var(--color-text); }
+
+.dashboard-page .period-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 3px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--color-card);
+}
+.dashboard-page .period-filter {
+    min-height: 30px;
+    padding: 4px 9px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+.dashboard-page .period-filter:hover { background: var(--color-soft); color: var(--color-sidebar); }
+.dashboard-page .period-filter[aria-pressed="true"] {
+    background: var(--green);
+    color: var(--color-card);
+}
+.dashboard-page button,
+.dashboard-page input,
+.dashboard-page select { border-color: var(--border); }
+.dashboard-page button { background: var(--color-card); color: var(--text-primary); }
+.dashboard-page button:hover { background: var(--color-soft); border-color: var(--color-highlight); }
+
+@media (max-width: 1100px) {
+    .dashboard-page .rover-status { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .dashboard-page .sensor-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 900px) {
+    .dashboard-page .bottom-grid { grid-template-columns: 1fr; }
+    .dashboard-page .map-panel { order: 1; }
+    .dashboard-page .history-panel { order: 2; }
+}
+
+@media (max-width: 760px) {
+    .dashboard-page .main-content { padding: 0 16px 28px; }
+    .dashboard-page .topbar {
+        min-height: 170px;
+        margin: 0 -16px 14px;
+        padding: 22px 18px;
+        align-items: flex-start;
+        justify-content: center;
+    }
+    .dashboard-page .topbar .status-indicator { display: none; }
+    .dashboard-page .rover-selector {
+        grid-template-columns: 76px minmax(0, 1fr);
+        gap: 10px;
+        padding: 12px;
+    }
+    .dashboard-page .selected-rover-image { width: 74px; height: 68px; }
+    .dashboard-page .rover-selector select { grid-column: 1 / -1; }
+    .dashboard-page .rover-status { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .dashboard-page .sensor-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .dashboard-page .sensor-card { min-height: 158px; padding: 13px; }
+    .dashboard-page .sensor-value { padding-left: 0; }
+    .dashboard-page .history-panel .panel-header { align-items: flex-start; }
+    .dashboard-page #map { height: 320px; }
+}
+
+@media (max-width: 430px) {
+    .dashboard-page .rover-status,
+    .dashboard-page .sensor-grid { grid-template-columns: 1fr; }
+    .dashboard-page .status-card { min-height: 74px; }
+    .dashboard-page .sensor-card { min-height: 150px; }
+    .dashboard-page .history-charts { grid-template-columns: 1fr; }
+    .dashboard-page .chart-box:last-child { grid-column: auto; }
+    .dashboard-page .panel { padding: 14px; }
+}

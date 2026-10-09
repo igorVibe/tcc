@@ -105,7 +105,7 @@ async function carregarRovers() {
 
     // Atualiza o nome/ID exibido
     selectedRover.textContent =
-        roverSelecionado.id_rover;
+        `${roverSelecionado.id_rover} - ${roverSelecionado.nome}`;
 
     // Atualiza bateria
     atualizarBateria(
@@ -198,6 +198,12 @@ async function carregarTelemetria(idRover) {
             telemetrias.length === 0
         ) {
 
+            document.getElementById("roverConnectionStatus").textContent =
+                "Sem telemetria";
+            document.getElementById("lastUpdate").textContent = "--";
+            document.getElementById("latitude").textContent = "--";
+            document.getElementById("longitude").textContent = "--";
+
             console.log(
                 "Nenhuma telemetria encontrada."
             );
@@ -216,6 +222,9 @@ async function carregarTelemetria(idRover) {
 
         const ultima =
             telemetrias[0];
+
+        document.getElementById("roverConnectionStatus").textContent =
+            "Dados recebidos";
 
 
         console.log(
@@ -519,6 +528,18 @@ roverSelect.addEventListener(
         selectedRover.textContent =
             idRover;
 
+        document.getElementById("roverConnectionStatus").textContent =
+            "Aguardando dados";
+        document.getElementById("lastUpdate").textContent = "--";
+        document.getElementById("latitude").textContent = "--";
+        document.getElementById("longitude").textContent = "--";
+        document.getElementById("soilHumidity").textContent = "--";
+        document.getElementById("airHumidity").textContent = "--";
+        document.getElementById("temperature").textContent = "--";
+        document.getElementById("airQuality").textContent = "--";
+        document.getElementById("rssiValue").textContent = "-- dBm";
+        limparPosicaoMapa();
+
 
         try {
 
@@ -558,6 +579,9 @@ roverSelect.addEventListener(
 
             console.log("Rover selecionado:", rover);
 
+            selectedRover.textContent =
+                `${rover.id_rover} - ${rover.nome}`;
+
             atualizarBateria(
                 rover.bateria
             );
@@ -589,6 +613,22 @@ roverSelect.addEventListener(
 // ========================================
 // LOGOUT
 // ========================================
+
+document.querySelectorAll(".period-filter").forEach(button => {
+    button.addEventListener("click", () => {
+        chartPeriodHours = Number(button.dataset.period);
+        document.querySelectorAll(".period-filter").forEach(filter => {
+            filter.setAttribute(
+                "aria-pressed",
+                String(filter === button)
+            );
+        });
+
+        if (roverSelect.value) {
+            carregarGraficos(roverSelect.value);
+        }
+    });
+});
 
 document
     .getElementById("logoutButton")
@@ -661,7 +701,31 @@ let soilHumidityChart = null;
 let airHumidityChart = null;
 let rssiChart = null;
 let airQualityChart = null;
+let miniCharts = {};
+let chartPeriodHours = 24;
 let ultimoTotalTelemetrias = 0;
+
+function limparGraficos() {
+    [
+        temperatureChart,
+        soilHumidityChart,
+        airHumidityChart,
+        rssiChart,
+        airQualityChart,
+        ...Object.values(miniCharts)
+    ].forEach(chart => {
+        if (chart) {
+            chart.destroy();
+        }
+    });
+
+    temperatureChart = null;
+    soilHumidityChart = null;
+    airHumidityChart = null;
+    rssiChart = null;
+    airQualityChart = null;
+    miniCharts = {};
+}
 
 
 async function carregarGraficos(idRover) {
@@ -696,6 +760,7 @@ async function carregarGraficos(idRover) {
 
         if (!telemetrias || telemetrias.length === 0) {
 
+            limparGraficos();
             console.log(
                 "Nenhuma telemetria encontrada para os gráficos."
             );
@@ -708,8 +773,15 @@ async function carregarGraficos(idRover) {
         // para a mais antiga.
         // Invertemos para ficar em ordem cronológica.
 
+        const limitePeriodo =
+            Date.now() - chartPeriodHours * 60 * 60 * 1000;
         const dados =
-            [...telemetrias].reverse();
+            [...telemetrias]
+                .reverse()
+                .filter(item => {
+                    const instante = new Date(item.data_hora).getTime();
+                    return Number.isFinite(instante) && instante >= limitePeriodo;
+                });
 
 
         // ========================================
@@ -721,7 +793,12 @@ async function carregarGraficos(idRover) {
             const data =
                 new Date(item.data_hora);
 
-            return data.toLocaleTimeString("pt-BR");
+            return data.toLocaleString("pt-BR", {
+                day: "2-digit",
+                month: "2-digit",
+                hour: "2-digit",
+                minute: "2-digit"
+            });
 
         });
 
@@ -763,25 +840,72 @@ async function carregarGraficos(idRover) {
         // DESTRUIR GRÁFICOS ANTERIORES
         // ========================================
 
-        if (temperatureChart) {
-            temperatureChart.destroy();
-        }
+       limparGraficos();
 
-        if (soilHumidityChart) {
-            soilHumidityChart.destroy();
-        }
+       const miniChartConfigs = [
+           {
+               id: "soilHumidityMiniChart",
+               label: "Umidade do solo",
+               data: umidadeSolo,
+               color: "#25a45b"
+           },
+           {
+               id: "airHumidityMiniChart",
+               label: "Umidade do ar",
+               data: umidadeAr,
+               color: "#4389e8"
+           },
+           {
+               id: "temperatureMiniChart",
+               label: "Temperatura",
+               data: temperaturas,
+               color: "#f06b5b"
+           },
+           {
+               id: "airQualityMiniChart",
+               label: "Qualidade do ar",
+               data: qualidadeAr,
+               color: "#8b5cf6"
+           }
+       ];
 
-        if (airHumidityChart) {
-            airHumidityChart.destroy();
-        }
+       miniChartConfigs.forEach(config => {
+           const canvas = document.getElementById(config.id);
+           if (!canvas) {
+               return;
+           }
 
-        if (rssiChart) {
-            rssiChart.destroy();
-        }
-
-       if (airQualityChart) {
-    airQualityChart.destroy();
-}
+           miniCharts[config.id] = new Chart(canvas, {
+               type: "line",
+               data: {
+                   labels,
+                   datasets: [{
+                       label: config.label,
+                       data: config.data,
+                       borderColor: config.color,
+                       backgroundColor: `${config.color}20`,
+                       borderWidth: 1.5,
+                       pointRadius: 0,
+                       fill: true,
+                       tension: 0.35,
+                       spanGaps: false
+                   }]
+               },
+               options: {
+                   responsive: true,
+                   maintainAspectRatio: false,
+                   animation: false,
+                   plugins: {
+                       legend: { display: false },
+                       tooltip: { enabled: true }
+                   },
+                   scales: {
+                       x: { display: false },
+                       y: { display: false }
+                   }
+               }
+           });
+       });
 
         // ========================================
         // TEMPERATURA
@@ -1287,15 +1411,9 @@ function inicializarMapa() {
     }
 
 
-    // Coordenadas iniciais
-    // Usadas apenas para criar o mapa.
-    const latitudeInicial = -21.208;
-    const longitudeInicial = -50.432;
-
-
     mapa = L.map("map").setView(
-        [latitudeInicial, longitudeInicial],
-        15
+        [0, 0],
+        2
     );
 
 
@@ -1309,21 +1427,23 @@ function inicializarMapa() {
     ).addTo(mapa);
 
 
-    // Marcador inicial
-    marcadorRover = L.marker(
-        [latitudeInicial, longitudeInicial]
-    ).addTo(mapa);
-
-
-    marcadorRover.bindPopup(
-        "<strong>ROVER-01</strong><br>Posição inicial"
-    );
-
-
     console.log("🗺️ Mapa inicializado com sucesso!");
 }
 
 inicializarMapa();
+
+function limparPosicaoMapa() {
+    if (!mapa) {
+        return;
+    }
+
+    if (marcadorRover) {
+        mapa.removeLayer(marcadorRover);
+        marcadorRover = null;
+    }
+
+    mapa.setView([0, 0], 2);
+}
 
 // ========================================
 // ATUALIZAR POSIÇÃO DO ROVER NO MAPA
@@ -1357,8 +1477,11 @@ function atualizarMapa(latitude, longitude, idRover) {
         return;
     }
 
-    // Atualiza a posição do marcador
-    marcadorRover.setLatLng([lat, lng]);
+    if (marcadorRover) {
+        marcadorRover.setLatLng([lat, lng]);
+    } else {
+        marcadorRover = L.marker([lat, lng]).addTo(mapa);
+    }
 
     // Centraliza o mapa no Rover
     mapa.setView([lat, lng]);
